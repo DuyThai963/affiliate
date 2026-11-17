@@ -7,6 +7,8 @@ import QuickActionBar from "@/components/QuickActionBar";
 import TikTokShopCard from "@/components/TikTokShopCard";
 import VoucherList from "@/components/VoucherList";
 import VoucherSkeleton from "@/components/VoucherSkeleton";
+import BottomNav from "@/components/BottomNav";
+import FnbHubView from "@/components/FnbHubView";
 import Toast from "@/components/Toast";
 import { VoucherSearchResponse } from "@/types/voucher";
 import {
@@ -15,13 +17,15 @@ import {
   ChevronUp,
   Info,
   AlertTriangle,
-  RefreshCw,
 } from "lucide-react";
 
 /**
- * [Design Read] Family: Unified Dual-Section Commerce Layout | Variance: 7/10 | Motion: 5/10 | Density: 9/10 | Accent: Shopee Vermilion (#ee4d2d) & TikTok Crimson (#fe2c55)
+ * [Design Read] Family: Unified Dual-Section Commerce & F&B Hub | Variance: 8/10 | Motion: 6/10 | Density: 9/10 | Accent: Vermilion (#ee4d2d), Highlands (#b31f24), TCH (#e57920)
  */
 export default function HomePage() {
+  // Chuyển đổi 2 chế độ chính: 'ecommerce' (Săn mã Sàn) | 'fnb' (Cà phê & Deal)
+  const [activeMode, setActiveMode] = useState<"ecommerce" | "fnb">("ecommerce");
+
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -37,7 +41,7 @@ export default function HomePage() {
     }, 2800);
   };
 
-  // 1. Tự động tải trước các mã có sẵn toàn sàn & sắp diễn ra ngay khi mở web
+  // 1. Tự động tải trước các mã sàn Shopee & TikTok khi mở web
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
@@ -51,6 +55,7 @@ export default function HomePage() {
             productCoupons: prev?.productCoupons || [],
             upcomingCoupons: initData.upcomingCoupons || [],
             hotCoupons: initData.hotCoupons || [],
+            tiktokCoupons: initData.tiktokCoupons || [],
             debugLogs: initData.debugLogs,
           }));
         }
@@ -119,85 +124,127 @@ export default function HomePage() {
   };
 
   return (
-    <div className="max-w-md mx-auto min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col relative transition-colors shadow-2xl">
+    <div className="max-w-md mx-auto min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col relative transition-colors shadow-2xl pb-20">
       {/* Header */}
       <Header />
 
-      {/* Sticky Top Input Bar */}
-      <LinkInputBar
-        url={url}
-        setUrl={setUrl}
-        onSearch={handleSearch}
-        isLoading={isLoading}
-      />
-
-      {/* Main Content Area */}
-      <main className="flex-1 px-4 py-4 space-y-4">
-        {/* Banner thông báo DEMO nếu chưa điền key Accesstrade */}
-        {data?.isDemo && (
-          <div className="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 rounded-2xl flex items-start space-x-2.5">
-            <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-            <div className="text-xs text-amber-800 dark:text-amber-300">
-              <p className="font-bold">Đang hiển thị chế độ DEMO mẫu</p>
-              <p className="mt-0.5 leading-relaxed text-[11px] opacity-90">
-                Hãy cấu hình <code className="font-mono bg-amber-100 dark:bg-amber-900/60 px-1 py-0.5 rounded">ACCESSTRADE_API_KEY</code> trong file <code className="font-mono">.env.local</code> để tạo link thực tế từ Accesstrade.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Thông báo lỗi nếu có */}
-        {error && !isLoading && (
-          <div className="p-3.5 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900/60 rounded-2xl text-xs text-rose-700 dark:text-rose-300 flex items-start space-x-2">
-            <Info className="w-4 h-4 shrink-0 mt-0.5" />
-            <p className="leading-relaxed">{error}</p>
-          </div>
-        )}
-
-        {/* Trạng thái Loading Skeleton */}
-        {isLoading && <VoucherSkeleton />}
-
-        {/* TRƯỜNG HỢP 1: TIKTOK SHOP -> 1 Nút to duy nhất */}
-        {!isLoading && data?.platform === "tiktok" && (
-          <TikTokShopCard
-            affiliateLink={data.affiliateLink}
-            cleanUrl={data.cleanUrl}
-            onShowToast={showToast}
+      {/* CHẾ ĐỘ 1: SĂN MÃ SÀN (SHOPEE & TIKTOK) */}
+      {activeMode === "ecommerce" && (
+        <>
+          {/* Sticky Top Input Bar */}
+          <LinkInputBar
+            url={url}
+            setUrl={setUrl}
+            onSearch={handleSearch}
+            isLoading={isLoading}
           />
-        )}
 
-        {/* TRƯỜNG HỢP 2: SHOPEE (hoặc khi mới mở web lên) */}
-        {!isLoading && data?.platform !== "tiktok" && (
-          <>
-            {/* Quick Action Bar (Chỉ hiện khi đã tìm kiếm link Shopee thành công) */}
-            {hasSearched && data?.affiliateLink && (
-              <QuickActionBar
+          {/* Main Content Area */}
+          <main className="flex-1 px-4 py-4 space-y-4">
+            {/* Banner thông báo DEMO nếu chưa điền key Accesstrade */}
+            {data?.isDemo && (
+              <div className="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 rounded-2xl flex items-start space-x-2.5">
+                <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                <div className="text-xs text-amber-800 dark:text-amber-300">
+                  <p className="font-bold">Đang hiển thị chế độ DEMO mẫu</p>
+                  <p className="mt-0.5 leading-relaxed text-[11px] opacity-90">
+                    Hãy cấu hình <code className="font-mono bg-amber-100 dark:bg-amber-900/60 px-1 py-0.5 rounded">ACCESSTRADE_API_KEY</code> trong file <code className="font-mono">.env.local</code> để tạo link thực tế từ Accesstrade.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Thông báo lỗi nếu có */}
+            {error && !isLoading && (
+              <div className="p-3.5 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900/60 rounded-2xl text-xs text-rose-700 dark:text-rose-300 flex items-start space-x-2">
+                <Info className="w-4 h-4 shrink-0 mt-0.5" />
+                <p className="leading-relaxed">{error}</p>
+              </div>
+            )}
+
+            {/* Trạng thái Loading Skeleton */}
+            {isLoading && <VoucherSkeleton />}
+
+            {/* NẾU LÀ TIKTOK SHOP -> 1 Nút to duy nhất */}
+            {!isLoading && data?.platform === "tiktok" && (
+              <TikTokShopCard
                 affiliateLink={data.affiliateLink}
                 cleanUrl={data.cleanUrl}
                 onShowToast={showToast}
               />
             )}
 
-            {/* DANH SÁCH VOUCHER 2 KHUNG:
-                - Khung 1 (trên): Mã áp dụng ngay cho sản phẩm vừa tìm (khi hasSearched)
-                - Khung 2 (dưới): Mã Hot toàn sàn + Mã Sắp diễn ra (hiển thị luôn cho user copy) */}
-            <VoucherList
-              productCoupons={data?.productCoupons || []}
-              upcomingCoupons={data?.upcomingCoupons || []}
-              hotCoupons={data?.hotCoupons || []}
-              tiktokCoupons={data?.tiktokCoupons || []}
-              affiliateLink={data?.affiliateLink || "https://shopee.vn"}
-              hasSearched={hasSearched}
-              onShowToast={showToast}
-            />
-          </>
-        )}
-      </main>
+            {/* NẾU LÀ SHOPEE HOẶC DANH SÁCH BAN ĐẦU */}
+            {!isLoading && data?.platform !== "tiktok" && (
+              <>
+                {/* Quick Action Bar (Khi đã tìm kiếm Shopee thành công) */}
+                {hasSearched && data?.affiliateLink && (
+                  <QuickActionBar
+                    affiliateLink={data.affiliateLink}
+                    cleanUrl={data.cleanUrl}
+                    onShowToast={showToast}
+                  />
+                )}
 
-      {/* Footer */}
-      <footer className="px-4 py-4 text-center border-t border-zinc-200/60 dark:border-zinc-800/80 text-[11px] text-zinc-400 dark:text-zinc-500">
-        <p>Shopee &amp; TikTok Shop Affiliate Finder &bull; Mobile PWA</p>
-      </footer>
+                {/* Danh sách Voucher 2 Khung */}
+                <VoucherList
+                  productCoupons={data?.productCoupons || []}
+                  upcomingCoupons={data?.upcomingCoupons || []}
+                  hotCoupons={data?.hotCoupons || []}
+                  tiktokCoupons={data?.tiktokCoupons || []}
+                  affiliateLink={data?.affiliateLink || "https://shopee.vn"}
+                  hasSearched={hasSearched}
+                  onShowToast={showToast}
+                />
+              </>
+            )}
+
+            {/* BẢNG KIỂM TRA LOG KẾT NỐI API ACCESSTRADE */}
+            {data?.debugLogs && data.debugLogs.length > 0 && (
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowLogs(!showLogs)}
+                  className="w-full py-2 px-3 bg-zinc-100 dark:bg-zinc-800/80 hover:bg-zinc-200 dark:hover:bg-zinc-700/80 rounded-xl text-[11px] font-bold text-zinc-600 dark:text-zinc-400 flex items-center justify-between transition"
+                >
+                  <div className="flex items-center space-x-1.5">
+                    <Terminal className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>Xem log phản hồi API Accesstrade ({data.debugLogs.length} sự kiện)</span>
+                  </div>
+                  {showLogs ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                </button>
+
+                {showLogs && (
+                  <div className="mt-2 p-3 bg-zinc-900 text-zinc-200 rounded-xl font-mono text-[10px] space-y-1 overflow-x-auto border border-zinc-800">
+                    <div className="text-zinc-500 pb-1 border-b border-zinc-800 font-sans font-bold text-[11px]">
+                      Server Request Logs:
+                    </div>
+                    {data.debugLogs.map((log, idx) => (
+                      <div key={idx} className="flex items-start space-x-1.5">
+                        <span className="text-emerald-400 shrink-0">&gt;</span>
+                        <span className="break-all">{log}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </main>
+        </>
+      )}
+
+      {/* CHẾ ĐỘ 2: CÀ PHÊ & DEAL (HIGHLANDS COFFEE & THE COFFEE HOUSE) */}
+      {activeMode === "fnb" && (
+        <main className="flex-1 px-4 py-4">
+          <FnbHubView onShowToast={showToast} />
+        </main>
+      )}
+
+      {/* Bottom Navigation Chuẩn App */}
+      <BottomNav
+        activeTab={activeMode}
+        onChangeTab={setActiveMode}
+      />
 
       {/* Toast Notification */}
       <Toast message={toastMessage} />
