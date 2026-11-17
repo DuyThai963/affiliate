@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="shopeeGradSmall" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b3d"/>
+      <stop offset="100%" stop-color="#ee4d2d"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="48" fill="url(#shopeeGradSmall)"/>
+  <!-- Voucher Ticket shape -->
+  <path d="M45 68 C45 60 51 54 59 54 L133 54 C141 54 147 60 147 68 L147 86 C141 86 136 91 136 96 C136 101 141 106 147 106 L147 124 C147 132 141 138 133 138 L59 138 C51 138 45 132 45 124 L45 106 C51 106 56 101 56 96 C56 91 51 86 45 86 Z" fill="#ffffff"/>
+  <!-- Dotted divider -->
+  <line x1="105" y1="60" x2="105" y2="132" stroke="#ee4d2d" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/>
+  <!-- Bolt icon -->
+  <path d="M72 75 L86 75 L70 99 L82 99 L66 117 L73 95 L63 95 Z" fill="#ee4d2d"/>
+  <circle cx="123" cy="78" r="5" fill="#ee4d2d"/>
+  <circle cx="123" cy="114" r="5" fill="#ee4d2d"/>
+  <line x1="116" y1="120" x2="130" y2="72" stroke="#ee4d2d" stroke-width="2" stroke-linecap="round"/>
+</svg>
