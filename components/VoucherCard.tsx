@@ -153,13 +153,28 @@ export default function VoucherCard({
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200/90 dark:border-zinc-800 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col">
       {/* Khối chính: 3 cột (Logo Shopee - Nội dung & Progress bar - Nút hành động) */}
       <div className="p-3.5 flex items-stretch space-x-3">
-        {/* Cột 1: Logo Shopee cam bo góc */}
-        <div className="w-16 sm:w-20 shrink-0 bg-gradient-to-br from-shopee-500 to-shopee-600 rounded-xl flex flex-col items-center justify-center p-2 text-white shadow-sm shadow-shopee-500/20">
-          <ShoppingBag className="w-6 h-6 stroke-[2.2] mb-1" />
-          <span className="text-[10px] font-black tracking-tight uppercase">
-            Shopee
-          </span>
-        </div>
+        {/* Cột 1: Logo Shopee hoặc TikTok Shop */}
+        {voucher.platform === "tiktok" ? (
+          <div className="w-16 sm:w-20 shrink-0 bg-black rounded-xl flex flex-col items-center justify-center p-2 text-white shadow-sm shadow-black/40">
+            <svg
+              className="w-5 h-5 fill-white mb-1"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-2.891 2.891 2.896 2.896 0 0 1-2.892-2.891 2.896 2.896 0 0 1 2.892-2.892c.307 0 .604.05.882.14v-3.53a6.37 6.37 0 0 0-.882-.061C5.834 9.329 3 12.163 3 15.653 3 19.143 5.834 22 9.473 22c3.54 0 6.423-2.79 6.473-6.297V9.458a8.216 8.216 0 0 0 4.643 1.442V7.455a4.83 4.83 0 0 1-1-.769z" />
+            </svg>
+            <span className="text-[9px] font-black tracking-tight uppercase">
+              TikTok
+            </span>
+          </div>
+        ) : (
+          <div className="w-16 sm:w-20 shrink-0 bg-gradient-to-br from-shopee-500 to-shopee-600 rounded-xl flex flex-col items-center justify-center p-2 text-white shadow-sm shadow-shopee-500/20">
+            <ShoppingBag className="w-6 h-6 stroke-[2.2] mb-1" />
+            <span className="text-[10px] font-black tracking-tight uppercase">
+              Shopee
+            </span>
+          </div>
+        )}
 
         {/* Cột 2: Nội dung voucher + Metadata + Progress bar */}
         <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
@@ -258,15 +273,32 @@ export default function VoucherCard({
               </button>
             </>
           ) : (
-            /* Trường hợp mã thu thập trên banner Shopee */
-            <button
-              type="button"
-              onClick={handleSaveBannerVoucher}
-              className="h-full w-full py-2 px-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-[11px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition"
-            >
-              <Bookmark className="w-3.5 h-3.5" />
-              <span>Lưu mã</span>
-            </button>
+            /* Trường hợp mã thu thập trên sàn (TikTok Shop hoặc Shopee Banner) */
+            voucher.platform === "tiktok" ? (
+              <button
+                type="button"
+                onClick={handleSaveBannerVoucher}
+                className="h-full w-full py-2 px-1.5 rounded-xl bg-gradient-to-br from-black to-zinc-800 hover:to-zinc-700 text-white font-bold text-[10px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition border border-rose-500/30 shadow-sm"
+              >
+                <svg
+                  className="w-4 h-4 fill-white"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-2.891 2.891 2.896 2.896 0 0 1-2.892-2.891 2.896 2.896 0 0 1 2.892-2.892c.307 0 .604.05.882.14v-3.53a6.37 6.37 0 0 0-.882-.061C5.834 9.329 3 12.163 3 15.653 3 19.143 5.834 22 9.473 22c3.54 0 6.423-2.79 6.473-6.297V9.458a8.216 8.216 0 0 0 4.643 1.442V7.455a4.83 4.83 0 0 1-1-.769z" />
+                </svg>
+                <span>Nhận mã</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleSaveBannerVoucher}
+                className="h-full w-full py-2 px-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-[11px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition"
+              >
+                <Bookmark className="w-3.5 h-3.5" />
+                <span>Lưu mã</span>
+              </button>
+            )
           )}
         </div>
       </div>

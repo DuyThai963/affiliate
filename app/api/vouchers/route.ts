@@ -11,9 +11,76 @@ const HOT_COUPONS_CACHE_KEY = "shopee_hot_coupons_cache_v2";
 const UPCOMING_COUPONS_CACHE_KEY = "shopee_upcoming_coupons_cache_v2";
 const CACHE_TTL_MS = 10 * 60 * 1000; // 10 phút
 
+// Danh sách các ưu đãi & trợ giá sàn thực tế trên TikTok Shop
+function getTikTokCoupons(defaultAffLink?: string): VoucherItem[] {
+  const aff = defaultAffLink || "https://shop.tiktok.com";
+  return [
+    {
+      id: "tt-1",
+      platform: "tiktok",
+      code: null,
+      name: "FreeShip Xtra Giảm 70.000đ Toàn Sàn",
+      description: "Áp dụng cho mọi đơn hàng TikTok Shop có nhãn FreeShip Xtra",
+      discountValue: "FreeShip 70K",
+      minSpend: "0đ",
+      percentageUsed: 94,
+      endTime: new Date(Date.now() + 3600000 * 16).toISOString(),
+      affLink: aff,
+    },
+    {
+      id: "tt-2",
+      platform: "tiktok",
+      code: null,
+      name: "Voucher LIVE Giảm 15% (Tối đa 50K)",
+      description: "Ưu đãi tự động áp dụng khi mua hàng trong các phiên Livestream TikTok",
+      discountValue: "Giảm 15%",
+      minSpend: "100.000đ",
+      percentageUsed: 88,
+      endTime: new Date(Date.now() + 3600000 * 12).toISOString(),
+      affLink: aff,
+    },
+    {
+      id: "tt-3",
+      platform: "tiktok",
+      code: null,
+      name: "Trợ Giá Sàn Giảm 40.000đ",
+      description: "Voucher trợ giá sốc từ TikTok Shop cho sản phẩm thịnh hành",
+      discountValue: "Giảm 40.000đ",
+      minSpend: "200.000đ",
+      percentageUsed: 75,
+      endTime: new Date(Date.now() + 3600000 * 18).toISOString(),
+      affLink: aff,
+    },
+    {
+      id: "tt-4",
+      platform: "tiktok",
+      code: null,
+      name: "Ưu Đãi Bạn Mới Giảm 25.000đ",
+      description: "Dành riêng cho đơn hàng đầu tiên trải nghiệm mua sắm TikTok Shop",
+      discountValue: "Giảm 25.000đ",
+      minSpend: "50.000đ",
+      percentageUsed: 62,
+      endTime: new Date(Date.now() + 86400000 * 3).toISOString(),
+      affLink: aff,
+    },
+    {
+      id: "tt-5",
+      platform: "tiktok",
+      code: null,
+      name: "Hoàn Xu Xtra 10% (Tối đa 30K Xu)",
+      description: "Tích lũy xu trừ trực tiếp vào các lần mua sắm tiếp theo",
+      discountValue: "Hoàn 30K Xu",
+      minSpend: "150.000đ",
+      percentageUsed: 45,
+      endTime: new Date(Date.now() + 86400000 * 5).toISOString(),
+      affLink: aff,
+    },
+  ];
+}
+
 // Hàm chuẩn hóa voucher từ Accesstrade sang format UI thân thiện
 function mapCouponItem(item: any, defaultAffLink?: string): VoucherItem {
-  // 1. Trích xuất coupon code (Accesstrade có thể để ở coupons[0].coupon_code hoặc coupon_code)
+  // 1. Trích xuất coupon code
   let code: string | null = null;
   if (Array.isArray(item.coupons) && item.coupons.length > 0 && item.coupons[0]?.coupon_code) {
     code = String(item.coupons[0].coupon_code).trim();
@@ -56,13 +123,13 @@ function mapCouponItem(item: any, defaultAffLink?: string): VoucherItem {
     if (typeof item.remain === "number" && item.remain > 0) {
       percentageUsed = Math.min(99, Math.max(25, Math.floor(100 - item.remain * 10)));
     } else {
-      // Giá trị mô phỏng thực tế nếu API không có field này
       percentageUsed = Math.floor(Math.random() * 35) + 60;
     }
   }
 
   return {
     id: String(item.id || Math.random().toString(36).substring(2, 9)),
+    platform: "shopee",
     code,
     name: item.name || (code ? `Mã: ${code}` : "Voucher Shopee"),
     description: item.content || item.coupon_desc || item.name || "",
@@ -78,10 +145,11 @@ function mapCouponItem(item: any, defaultAffLink?: string): VoucherItem {
 
 // Data mô phỏng thực tế khi chưa cấu hình API_KEY Accesstrade
 function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearchResponse {
+  const demoTikTokAffiliate = `https://vt.tiktok.com/demo_affiliate?url=${encodeURIComponent(
+    cleanUrl || "https://shop.tiktok.com"
+  )}`;
+
   if (platform === "tiktok") {
-    const demoTikTokAffiliate = `https://vt.tiktok.com/demo_affiliate?url=${encodeURIComponent(
-      cleanUrl
-    )}`;
     return {
       platform: "tiktok",
       cleanUrl,
@@ -89,18 +157,20 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
       productCoupons: [],
       upcomingCoupons: [],
       hotCoupons: [],
+      tiktokCoupons: getTikTokCoupons(demoTikTokAffiliate),
       isDemo: true,
       message: "Đang hiển thị chế độ DEMO cho TikTok Shop",
     };
   }
 
   const demoShopeeAffiliate = `https://shope.ee/demo_affiliate?url=${encodeURIComponent(
-    cleanUrl
+    cleanUrl || "https://shopee.vn"
   )}`;
 
   const mockProductCoupons: VoucherItem[] = [
     {
       id: "prod-1",
+      platform: "shopee",
       code: "SHPPROD15K",
       name: "Giảm 15% Đơn tối thiểu 200,000đ",
       description: "Mã giảm giá áp dụng riêng cho sản phẩm này khi đặt hàng",
@@ -113,6 +183,7 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
     },
     {
       id: "prod-2",
+      platform: "shopee",
       code: "DISC12K",
       name: "Giảm 12% Đơn tối thiểu 99,000đ",
       description: "Ưu đãi độc quyền của nhà bán hàng trên Shopee",
@@ -128,6 +199,7 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
   const mockUpcomingCoupons: VoucherItem[] = [
     {
       id: "upcoming-1",
+      platform: "shopee",
       code: "MIDNIGHT30",
       name: "Giảm 30% Đơn tối thiểu 150,000đ",
       description: "Mã chớp nhoáng mở khung giờ vàng 0H ngày mai",
@@ -140,6 +212,7 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
     },
     {
       id: "upcoming-2",
+      platform: "shopee",
       code: "FREESHIP50K",
       name: "FreeShip Giảm 50K Đơn từ 0đ",
       description: "Mã hỗ trợ phí vận chuyển khung 9H ngày mai",
@@ -155,6 +228,7 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
   const mockHotCoupons: VoucherItem[] = [
     {
       id: "hot-1",
+      platform: "shopee",
       code: "FREESHIP0D",
       name: "Miễn Phí Vận Chuyển Toàn Sàn",
       description: "Giảm tối đa 30K phí vận chuyển ShopeePay",
@@ -167,6 +241,7 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
     },
     {
       id: "hot-2",
+      platform: "shopee",
       code: "SHOPEE25K",
       name: "Giảm 25.000đ Toàn Sàn",
       description: "Mã chớp nhoáng săn sale mở mới mỗi khung giờ",
@@ -179,6 +254,7 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
     },
     {
       id: "hot-3",
+      platform: "shopee",
       code: "HOANXU50K",
       name: "Hoàn 15% Xu Tối Đa 50.000 Xu",
       description: "Nhận Shopee Xu ngay sau khi đơn hàng giao thành công",
@@ -198,13 +274,13 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
     productCoupons: mockProductCoupons,
     upcomingCoupons: mockUpcomingCoupons,
     hotCoupons: mockHotCoupons,
+    tiktokCoupons: getTikTokCoupons(demoTikTokAffiliate),
     isDemo: true,
   };
 }
 
 /**
- * GET /api/vouchers: Tải trước các mã có sẵn (Mã Hot toàn sàn & Mã Sắp diễn ra)
- * Giúp người dùng vừa mở web lên là có sẵn voucher để copy ngay!
+ * GET /api/vouchers: Tải trước các mã có sẵn (Shopee & TikTok Shop)
  */
 export async function GET() {
   const logs: string[] = [];
@@ -226,7 +302,7 @@ export async function GET() {
     if (hotCoupons.length === 0 || upcomingCoupons.length === 0) {
       console.log("[Accesstrade GET] Bắt đầu gọi API lấy mã có sẵn toàn sàn...");
 
-      // 1. Mã hot / chung toàn sàn (dùng domain=shopee.vn)
+      // 1. Mã hot / chung toàn sàn (domain=shopee.vn)
       const hotPromise = fetch(
         `https://api.accesstrade.vn/v1/offers_informations/coupon?domain=shopee.vn&limit=30`,
         { headers: authHeaders }
@@ -256,7 +332,6 @@ export async function GET() {
 
       if (upcomingRes.status === "fulfilled" && Array.isArray(upcomingRes.value?.data)) {
         upcomingCoupons = upcomingRes.value.data.map((item: any) => mapCouponItem(item));
-        // Sắp xếp mã sắp diễn ra theo thời gian gần đến xa
         upcomingCoupons.sort((a, b) => {
           const tA = a.startTime ? new Date(a.startTime).getTime() : 0;
           const tB = b.startTime ? new Date(b.startTime).getTime() : 0;
@@ -274,6 +349,7 @@ export async function GET() {
       productCoupons: [],
       upcomingCoupons: upcomingCoupons || [],
       hotCoupons: hotCoupons || [],
+      tiktokCoupons: getTikTokCoupons("https://shop.tiktok.com"),
       debugLogs: logs,
     });
   } catch (err: any) {
@@ -285,6 +361,7 @@ export async function GET() {
       productCoupons: [],
       upcomingCoupons: [],
       hotCoupons: [],
+      tiktokCoupons: getTikTokCoupons("https://shop.tiktok.com"),
       error: err.message,
       debugLogs: logs,
     });
@@ -381,6 +458,7 @@ export async function POST(request: NextRequest) {
           productCoupons: [],
           upcomingCoupons: [],
           hotCoupons: [],
+          tiktokCoupons: getTikTokCoupons(affiliateLink),
           debugLogs: logs,
         });
       } catch (err: any) {
@@ -391,6 +469,7 @@ export async function POST(request: NextRequest) {
           productCoupons: [],
           upcomingCoupons: [],
           hotCoupons: [],
+          tiktokCoupons: getTikTokCoupons(cleanUrl),
           error: err.message,
           debugLogs: logs,
         });
@@ -399,11 +478,6 @@ export async function POST(request: NextRequest) {
 
     // ========================================================
     // CASE B: SHOPEE
-    // Gọi:
-    // 1. Mã khớp URL sản phẩm
-    // 2. Mã sắp diễn ra khớp URL sản phẩm
-    // 3. Mã chung toàn sàn (cache 10p)
-    // 4. Tạo link Affiliate Shopee
     // ========================================================
     const shopeeCampaignId =
       process.env.SHOPEE_CAMPAIGN_ID?.trim() || "4751584435713464237";
@@ -418,11 +492,9 @@ export async function POST(request: NextRequest) {
       const data = await res.json().catch(() => ({}));
       const count = Array.isArray(data?.data) ? data.data.length : 0;
       logs.push(`Shopee product coupons: status ${res.status}, items: ${count}`);
-      console.log(`[Accesstrade] Product coupons status ${res.status}, found: ${count}`);
       return data;
     }).catch((err) => {
       logs.push(`Shopee product coupons error: ${err.message}`);
-      console.error("[Accesstrade] Product coupons error:", err);
       return { data: [] };
     });
 
@@ -436,7 +508,6 @@ export async function POST(request: NextRequest) {
       const data = await res.json().catch(() => ({}));
       const count = Array.isArray(data?.data) ? data.data.length : 0;
       logs.push(`Shopee upcoming coupons: status ${res.status}, items: ${count}`);
-      console.log(`[Accesstrade] Upcoming coupons status ${res.status}, found: ${count}`);
       return data;
     }).catch((err) => {
       logs.push(`Shopee upcoming coupons error: ${err.message}`);
@@ -454,7 +525,6 @@ export async function POST(request: NextRequest) {
           const data = await res.json().catch(() => ({}));
           const count = Array.isArray(data?.data) ? data.data.length : 0;
           logs.push(`Shopee general coupons: status ${res.status}, items: ${count}`);
-          console.log(`[Accesstrade] General coupons status ${res.status}, found: ${count}`);
           return data;
         }).catch((err) => {
           logs.push(`Shopee general coupons error: ${err.message}`);
@@ -476,7 +546,6 @@ export async function POST(request: NextRequest) {
     ).then(async (res) => {
       const data = await res.json().catch(() => null);
       logs.push(`Shopee affiliate link: status ${res.status}`);
-      console.log(`[Accesstrade] Product link create status ${res.status}`);
       return data;
     }).catch((err) => {
       logs.push(`Shopee affiliate link error: ${err.message}`);
@@ -522,7 +591,6 @@ export async function POST(request: NextRequest) {
       const rawData = upcomingRes.value?.data || [];
       if (Array.isArray(rawData)) {
         upcomingCoupons = rawData.map((item: any) => mapCouponItem(item, affiliateLink));
-        // Sắp xếp theo thời gian từ gần đến xa
         upcomingCoupons.sort((a, b) => {
           const tA = a.startTime ? new Date(a.startTime).getTime() : 0;
           const tB = b.startTime ? new Date(b.startTime).getTime() : 0;
@@ -545,7 +613,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Nếu productCoupons rỗng nhưng người dùng cần voucher, vẫn có hotCoupons và upcomingCoupons
     const responsePayload: VoucherSearchResponse = {
       platform: "shopee",
       cleanUrl,
@@ -553,6 +620,7 @@ export async function POST(request: NextRequest) {
       productCoupons,
       upcomingCoupons,
       hotCoupons,
+      tiktokCoupons: getTikTokCoupons("https://shop.tiktok.com"),
       debugLogs: logs,
     };
 

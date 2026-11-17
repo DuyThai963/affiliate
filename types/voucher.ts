@@ -32,6 +32,7 @@ export interface VoucherItem {
   affLink?: string;
   bannerUrl?: string;
   isExpired?: boolean;
+  platform?: SupportedPlatform;
 }
 
 export type SupportedPlatform = "shopee" | "tiktok";
@@ -43,6 +44,7 @@ export interface VoucherSearchResponse {
   productCoupons: VoucherItem[];
   upcomingCoupons: VoucherItem[];
   hotCoupons: VoucherItem[];
+  tiktokCoupons?: VoucherItem[];
   isDemo?: boolean;
   message?: string;
   error?: string;
