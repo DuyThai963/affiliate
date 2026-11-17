@@ -34,6 +34,14 @@ const config: Config = {
           500: "#b86c28", // Warm caramel latte
           600: "#9e591c",
         },
+        tiktok: {
+          red: "#fe2c55",
+          redHover: "#e0264b",
+          cyan: "#25f4ee",
+          dark: "#121212",
+          surface: "#18181c",
+          pill: "#26262b",
+        },
         canvas: {
           light: "#faf9f6", // Giấy kem mỹ thuật ấm dịu
           card: "#ffffff",

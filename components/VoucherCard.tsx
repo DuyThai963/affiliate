@@ -24,7 +24,7 @@ interface VoucherCardProps {
 }
 
 /**
- * [Design Read] Family: Tactile Pastel Commerce Ticket | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Pastel Terracotta (#d96947) & Warm Amber
+ * [Design Read] Family: TikTok Shop Commerce Ticket | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: TikTok Red (#fe2c55), Cyan (#25f4ee) & Pill CTAs
  */
 export default function VoucherCard({
   voucher,
@@ -150,25 +150,28 @@ export default function VoucherCard({
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200/90 dark:border-zinc-800 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col">
-      {/* Khối chính: 3 cột (Logo Shopee - Nội dung & Progress bar - Nút hành động) */}
+    <div className="bg-white dark:bg-[#161823] border border-zinc-200/90 dark:border-zinc-800 rounded-3xl shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col">
+      {/* Khối chính: 3 cột (Logo - Nội dung & Progress bar - Nút hành động) */}
       <div className="p-3.5 flex items-stretch space-x-3">
         {/* Cột 1: Logo Shopee hoặc TikTok Shop */}
         {voucher.platform === "tiktok" ? (
-          <div className="w-16 sm:w-20 shrink-0 bg-black rounded-xl flex flex-col items-center justify-center p-2 text-white shadow-sm shadow-black/40">
-            <svg
-              className="w-5 h-5 fill-white mb-1"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-2.891 2.891 2.896 2.896 0 0 1-2.892-2.891 2.896 2.896 0 0 1 2.892-2.892c.307 0 .604.05.882.14v-3.53a6.37 6.37 0 0 0-.882-.061C5.834 9.329 3 12.163 3 15.653 3 19.143 5.834 22 9.473 22c3.54 0 6.423-2.79 6.473-6.297V9.458a8.216 8.216 0 0 0 4.643 1.442V7.455a4.83 4.83 0 0 1-1-.769z" />
-            </svg>
-            <span className="text-[9px] font-black tracking-tight uppercase">
-              TikTok
-            </span>
+          <div className="w-16 sm:w-20 shrink-0 bg-black rounded-2xl flex flex-col items-center justify-center p-2 text-white shadow-xs border border-zinc-800 relative group overflow-hidden">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-tiktok-cyan/30 to-tiktok-red/30 opacity-60 rounded-2xl" />
+            <div className="relative z-10 flex flex-col items-center">
+              <svg
+                className="w-5 h-5 fill-white mb-1"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-2.891 2.891 2.896 2.896 0 0 1-2.892-2.891 2.896 2.896 0 0 1 2.892-2.892c.307 0 .604.05.882.14v-3.53a6.37 6.37 0 0 0-.882-.061C5.834 9.329 3 12.163 3 15.653 3 19.143 5.834 22 9.473 22c3.54 0 6.423-2.79 6.473-6.297V9.458a8.216 8.216 0 0 0 4.643 1.442V7.455a4.83 4.83 0 0 1-1-.769z" />
+              </svg>
+              <span className="text-[9px] font-black tracking-tight uppercase">
+                TikTok
+              </span>
+            </div>
           </div>
         ) : (
-          <div className="w-16 sm:w-20 shrink-0 bg-shopee-500 rounded-xl flex flex-col items-center justify-center p-2 text-white shadow-sm shadow-shopee-500/15">
+          <div className="w-16 sm:w-20 shrink-0 bg-shopee-500 rounded-2xl flex flex-col items-center justify-center p-2 text-white shadow-xs">
             <ShoppingBag className="w-6 h-6 stroke-[2.2] mb-1" />
             <span className="text-[10px] font-black tracking-tight uppercase">
               Shopee
@@ -181,12 +184,12 @@ export default function VoucherCard({
           <div>
             {/* Tag loại ưu đãi & Badge sắp diễn ra */}
             <div className="flex items-center space-x-1.5 mb-1 flex-wrap gap-y-1">
-              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60">
-                {isUpcoming ? "Sắp diễn ra" : "Giảm giá"}
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100/90 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60">
+                {isUpcoming ? "SẮP DIỄN RA" : "VOUCHER"}
               </span>
 
               {voucher.code && (
-                <span className="font-mono text-[10px] font-bold text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded border border-zinc-200 dark:border-zinc-700">
+                <span className="font-mono text-[10px] font-bold text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-full border border-zinc-200 dark:border-zinc-700">
                   {voucher.code}
                 </span>
               )}
@@ -200,10 +203,10 @@ export default function VoucherCard({
 
           {/* Metadata & Progress bar */}
           <div className="space-y-1 mt-auto">
-            {/* Thanh tiến độ pastel dịu mắt */}
+            {/* Thanh tiến độ TikTok Dual Gradient */}
             <div className="w-full h-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-amber-300 via-orange-300 to-rose-400 transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-tiktok-cyan via-amber-300 to-tiktok-red transition-all duration-500"
                 style={{ width: `${Math.max(5, isUpcoming ? 10 : percent)}%` }}
               />
             </div>
@@ -211,7 +214,7 @@ export default function VoucherCard({
             {/* Text Đã dùng % - còn X giờ nữa */}
             <div className="flex items-center justify-between text-[10px] text-zinc-500 dark:text-zinc-400 pt-0.5">
               <div className="flex items-center space-x-1 truncate">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-shopee-500 shrink-0" />
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-tiktok-red shrink-0" />
                 <span className="truncate">
                   {isUpcoming
                     ? remainingTimeStr
@@ -223,7 +226,7 @@ export default function VoucherCard({
               <button
                 type="button"
                 onClick={() => setShowDetail(!showDetail)}
-                className="text-shopee-600 dark:text-shopee-400 font-semibold hover:underline flex items-center space-x-0.5 shrink-0 ml-1"
+                className="text-zinc-600 dark:text-zinc-300 font-bold hover:text-tiktok-red dark:hover:text-tiktok-red flex items-center space-x-0.5 shrink-0 ml-1 transition-colors"
               >
                 <Info className="w-2.5 h-2.5" />
                 <span>Chi tiết</span>
@@ -237,7 +240,7 @@ export default function VoucherCard({
           </div>
         </div>
 
-        {/* Cột 3: Nút Copy & Nút Dùng ngay */}
+        {/* Cột 3: Nút Copy & Nút Dùng ngay (Pill CTA) */}
         <div className="w-20 sm:w-24 shrink-0 flex flex-col justify-between space-y-1.5">
           {voucher.code ? (
             <>
@@ -245,7 +248,7 @@ export default function VoucherCard({
               <button
                 type="button"
                 onClick={handleCopyCode}
-                className="w-full py-1.5 px-2 rounded-lg bg-orange-50/80 dark:bg-orange-950/40 hover:bg-orange-100/80 dark:hover:bg-orange-900/50 border border-orange-200/70 dark:border-orange-800/60 text-shopee-600 dark:text-shopee-400 font-bold text-[11px] flex items-center justify-center space-x-1 active:scale-95 transition"
+                className="w-full py-1.5 px-2 rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-black text-[11px] flex items-center justify-center space-x-1 active:scale-95 transition border border-zinc-200 dark:border-zinc-700"
               >
                 {isCopied ? (
                   <>
@@ -262,11 +265,11 @@ export default function VoucherCard({
                 )}
               </button>
 
-              {/* Nút Dùng ngay */}
+              {/* Nút Dùng ngay: TikTok Red Pill Button */}
               <button
                 type="button"
                 onClick={handleUseNow}
-                className="w-full py-1.5 px-2 rounded-lg bg-shopee-500 hover:bg-shopee-600 text-white font-bold text-[11px] shadow-sm shadow-shopee-500/15 flex items-center justify-center space-x-1 active:scale-95 transition"
+                className="w-full py-1.5 px-2 rounded-full bg-tiktok-red hover:bg-tiktok-redHover text-white font-black text-[11px] shadow-xs active:scale-95 transition flex items-center justify-center space-x-1"
               >
                 <ShoppingBag className="w-3 h-3" />
                 <span>Dùng ngay</span>
@@ -278,7 +281,7 @@ export default function VoucherCard({
               <button
                 type="button"
                 onClick={handleSaveBannerVoucher}
-                className="h-full w-full py-2 px-1.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-[10px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition border border-zinc-700/60 shadow-sm"
+                className="h-full w-full py-2 px-1.5 rounded-full bg-black hover:bg-zinc-900 text-white font-black text-[10px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition border border-tiktok-red/30 shadow-xs"
               >
                 <svg
                   className="w-4 h-4 fill-white"
@@ -293,7 +296,7 @@ export default function VoucherCard({
               <button
                 type="button"
                 onClick={handleSaveBannerVoucher}
-                className="h-full w-full py-2 px-2 rounded-lg bg-amber-600/90 hover:bg-amber-600 text-white font-bold text-[11px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition"
+                className="h-full w-full py-2 px-2 rounded-full bg-amber-500 hover:bg-amber-600 text-white font-black text-[11px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition shadow-xs"
               >
                 <Bookmark className="w-3.5 h-3.5" />
                 <span>Lưu mã</span>

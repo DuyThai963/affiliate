@@ -20,7 +20,7 @@ interface QuickActionBarProps {
 }
 
 /**
- * [Design Read] Family: Neo-Tactile Pastel Commerce Action Bar | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Terracotta (#d96947) + Soft Denim (#335384)
+ * [Design Read] Family: TikTok-Tactile Quick Action Bar | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Terracotta (#d96947) & Denim (#335384) with TikTok Geometry
  */
 export default function QuickActionBar({
   affiliateLink,
@@ -83,30 +83,30 @@ export default function QuickActionBar({
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200/90 dark:border-zinc-800 rounded-2xl p-3.5 shadow-sm space-y-3">
+    <div className="bg-white dark:bg-[#161823] border border-zinc-200/90 dark:border-zinc-800 rounded-3xl p-4 shadow-xs space-y-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-1.5">
           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-xs font-bold text-zinc-800 dark:text-zinc-200">
+          <span className="text-xs font-black text-zinc-900 dark:text-white">
             Link Affiliate Đã Sẵn Sàng
           </span>
         </div>
 
         <button
           onClick={handleCopyLink}
-          className="flex items-center space-x-1 text-[11px] font-semibold text-zinc-600 dark:text-zinc-300 hover:text-shopee-600 dark:hover:text-shopee-400 transition"
+          className="flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition"
         >
           {isCopied ? (
             <>
               <Check className="w-3 h-3 text-emerald-500" />
               <span className="text-emerald-600 dark:text-emerald-400">
-                Đã sao chép
+                Đã chép
               </span>
             </>
           ) : (
             <>
               <Copy className="w-3 h-3" />
-              <span>Copy link Aff</span>
+              <span>Copy link</span>
             </>
           )}
         </button>

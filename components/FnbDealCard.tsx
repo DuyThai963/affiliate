@@ -22,7 +22,7 @@ interface FnbDealCardProps {
 }
 
 /**
- * [Design Read] Family: Editorial Tactile F&B Ticket | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Highlands Burgundy (#982b32) & TCH Warm Caramel (#b86c28)
+ * [Design Read] Family: TikTok-Tactile F&B Ticket | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Highlands Burgundy (#982b32), TCH Warm Caramel (#b86c28) & Pill CTAs
  */
 export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
   const [isCopied, setIsCopied] = useState(false);
@@ -93,17 +93,17 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200/90 dark:border-zinc-800 rounded-3xl p-4 shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col justify-between space-y-3 group">
+    <div className="bg-white dark:bg-[#161823] border border-zinc-200/90 dark:border-zinc-800 rounded-3xl p-4 shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col justify-between space-y-3 group">
       {/* Header card: Thương hiệu & Trạng thái */}
       <div>
         <div className="flex items-center justify-between gap-2 mb-2">
           {/* Badge Thương hiệu */}
           <div className="flex items-center space-x-2">
             <div
-              className={`w-7 h-7 rounded-xl flex items-center justify-center text-white font-bold shadow-sm ${
+              className={`w-7 h-7 rounded-xl flex items-center justify-center text-white font-bold shadow-xs ${
                 isHighlands
-                  ? "bg-highlands-500 shadow-rose-950/10"
-                  : "bg-tch-500 shadow-amber-950/10"
+                  ? "bg-highlands-500"
+                  : "bg-tch-500"
               }`}
             >
               <Coffee className="w-4 h-4" />
@@ -128,7 +128,7 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
         {/* Tiêu đề ưu đãi & Giá trị giảm */}
         <div className="space-y-1">
           <div className="flex items-start justify-between gap-2">
-            <h4 className="font-extrabold text-sm text-zinc-900 dark:text-zinc-100 leading-snug group-hover:text-shopee-600 dark:group-hover:text-amber-400 transition-colors">
+            <h4 className="font-extrabold text-sm text-zinc-900 dark:text-zinc-100 leading-snug group-hover:text-tiktok-red transition-colors">
               {deal.title}
             </h4>
           </div>
@@ -139,7 +139,7 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
         </div>
 
         {/* Khung giờ vàng / Thời gian áp dụng */}
-        <div className="mt-2.5 p-2 bg-zinc-50 dark:bg-zinc-800/60 rounded-xl text-[11px] text-zinc-600 dark:text-zinc-300 space-y-1 border border-zinc-100 dark:border-zinc-800">
+        <div className="mt-2.5 p-2 bg-zinc-50 dark:bg-zinc-900/60 rounded-2xl text-[11px] text-zinc-600 dark:text-zinc-300 space-y-1 border border-zinc-100 dark:border-zinc-800/80">
           {deal.timeSlot && (
             <div className="flex items-center space-x-1.5 font-medium">
               <Clock className="w-3.5 h-3.5 text-amber-500 shrink-0" />
@@ -162,7 +162,7 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
           {deal.couponCode ? (
             /* Có coupon code: Hộp code + Nút Copy & Mở App */
             <>
-              <div className="flex-1 bg-zinc-50 dark:bg-zinc-800/80 border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-2.5 py-2 flex items-center justify-between">
+              <div className="flex-1 bg-zinc-50 dark:bg-zinc-900/80 border border-dashed border-zinc-300 dark:border-zinc-700 rounded-full px-3 py-1.5 flex items-center justify-between">
                 <span className="font-mono font-bold text-xs text-zinc-800 dark:text-zinc-200 select-all truncate">
                   {deal.couponCode}
                 </span>
@@ -170,7 +170,7 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
                   type="button"
                   onClick={handleCopyCode}
                   aria-label="Copy mã"
-                  className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition ml-1"
+                  className="p-1 rounded-full text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition ml-1"
                 >
                   {isCopied ? (
                     <Check className="w-3.5 h-3.5 text-emerald-500" />
@@ -183,10 +183,10 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
               <button
                 type="button"
                 onClick={handleAction}
-                className={`px-3.5 py-2 rounded-xl text-white font-bold text-xs shadow-sm active:scale-95 transition-all flex items-center space-x-1 shrink-0 ${
+                className={`px-4 py-2 rounded-full text-white font-black text-xs shadow-xs active:scale-95 transition-all flex items-center space-x-1 shrink-0 ${
                   isHighlands
-                    ? "bg-highlands-500 hover:bg-highlands-600 shadow-rose-950/10"
-                    : "bg-tch-500 hover:bg-tch-600 shadow-amber-950/10"
+                    ? "bg-highlands-500 hover:bg-highlands-600"
+                    : "bg-tch-500 hover:bg-tch-600"
                 }`}
               >
                 <span>Dùng ngay</span>
@@ -198,10 +198,10 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
             <button
               type="button"
               onClick={handleAction}
-              className={`w-full py-2.5 px-4 rounded-xl text-white font-extrabold text-xs shadow-sm active:scale-95 transition-all flex items-center justify-center space-x-1.5 ${
+              className={`w-full py-2.5 px-4 rounded-full text-white font-black text-xs shadow-xs active:scale-95 transition-all flex items-center justify-center space-x-1.5 ${
                 isHighlands
-                  ? "bg-highlands-500 hover:bg-highlands-600 shadow-rose-900/10"
-                  : "bg-tch-500 hover:bg-tch-600 shadow-amber-900/10"
+                  ? "bg-highlands-500 hover:bg-highlands-600"
+                  : "bg-tch-500 hover:bg-tch-600"
               }`}
             >
               <span>{isHighlands ? "Nhận Ưu Đãi Zalo Ngay" : "Nhận Ưu Đãi Tại Quán"}</span>

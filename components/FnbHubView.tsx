@@ -137,12 +137,12 @@ export default function FnbHubView({ onShowToast }: FnbHubViewProps) {
 
       {/* Bộ lọc nhanh phía trên + Nút làm mới */}
       <div className="flex items-center justify-between gap-1.5 pt-1">
-        <div className="flex items-center space-x-1 p-1 bg-zinc-200/80 dark:bg-zinc-800/80 rounded-xl flex-1">
+        <div className="flex items-center space-x-1 p-1 bg-zinc-100 dark:bg-zinc-800/80 rounded-full flex-1 border border-zinc-200/80 dark:border-zinc-700/80">
           <button
             onClick={() => setBrandFilter("all")}
-            className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`flex-1 py-1.5 rounded-full text-xs font-black transition-all ${
               brandFilter === "all"
-                ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-sm"
+                ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs"
                 : "text-zinc-600 dark:text-zinc-400"
             }`}
           >
@@ -151,9 +151,9 @@ export default function FnbHubView({ onShowToast }: FnbHubViewProps) {
 
           <button
             onClick={() => setBrandFilter("highlands")}
-            className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`flex-1 py-1.5 rounded-full text-xs font-black transition-all ${
               brandFilter === "highlands"
-                ? "bg-highlands-500 text-white shadow-sm"
+                ? "bg-highlands-500 text-white shadow-xs"
                 : "text-zinc-600 dark:text-zinc-400"
             }`}
           >
@@ -162,9 +162,9 @@ export default function FnbHubView({ onShowToast }: FnbHubViewProps) {
 
           <button
             onClick={() => setBrandFilter("tch")}
-            className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`flex-1 py-1.5 rounded-full text-xs font-black transition-all ${
               brandFilter === "tch"
-                ? "bg-tch-500 text-white shadow-sm"
+                ? "bg-tch-500 text-white shadow-xs"
                 : "text-zinc-600 dark:text-zinc-400"
             }`}
           >
@@ -176,7 +176,7 @@ export default function FnbHubView({ onShowToast }: FnbHubViewProps) {
           onClick={() => fetchDeals(true)}
           disabled={isLoading}
           title="Làm mới dữ liệu từ Accesstrade"
-          className="p-2.5 rounded-xl bg-zinc-200/80 dark:bg-zinc-800/80 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 transition active:scale-95 disabled:opacity-50 shrink-0"
+          className="p-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800/80 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 transition active:scale-95 disabled:opacity-50 shrink-0 border border-zinc-200/80 dark:border-zinc-700/80"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin" : ""}`} />
         </button>

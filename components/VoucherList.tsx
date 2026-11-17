@@ -24,7 +24,7 @@ interface VoucherListProps {
 }
 
 /**
- * [Design Read] Family: Unified Dual-Section Multi-Platform Layout | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Pastel Terracotta (#d96947) & Matte Charcoal (#121215)
+ * [Design Read] Family: Unified Dual-Section Multi-Platform Layout | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: TikTok Red (#fe2c55) & Pill Tab Geometry
  */
 export default function VoucherList({
   productCoupons,
@@ -108,15 +108,15 @@ export default function VoucherList({
             </span>
           </div>
 
-          <div className="flex items-center p-1 bg-zinc-200/80 dark:bg-zinc-800/80 rounded-xl space-x-1">
+          <div className="flex items-center p-1 bg-zinc-100 dark:bg-zinc-800/80 rounded-full space-x-1 border border-zinc-200/80 dark:border-zinc-700/80">
             {/* Tab Shopee */}
             <button
               type="button"
               onClick={() => setSelectedMarket("shopee")}
-              className={`flex items-center space-x-1.5 py-1.5 px-3 rounded-lg text-xs font-bold transition-all ${
+              className={`flex items-center space-x-1.5 py-1.5 px-3.5 rounded-full text-xs font-black transition-all ${
                 selectedMarket === "shopee"
-                  ? "bg-shopee-500 text-white shadow-sm shadow-shopee-500/30"
-                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+                  ? "bg-shopee-500 text-white shadow-xs"
+                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
               }`}
             >
               <ShoppingBag className="w-3.5 h-3.5" />
@@ -127,14 +127,14 @@ export default function VoucherList({
             <button
               type="button"
               onClick={() => setSelectedMarket("tiktok")}
-              className={`flex items-center space-x-1.5 py-1.5 px-3 rounded-lg text-xs font-bold transition-all ${
+              className={`flex items-center space-x-1.5 py-1.5 px-3.5 rounded-full text-xs font-black transition-all ${
                 selectedMarket === "tiktok"
-                  ? "bg-zinc-900 text-white shadow-sm border border-zinc-700/60"
-                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+                  ? "bg-black text-white shadow-xs border border-tiktok-red/40"
+                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
               }`}
             >
               <svg
-                className="w-3.5 h-3.5 fill-current"
+                className="w-3.5 h-3.5 fill-current text-tiktok-red"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
