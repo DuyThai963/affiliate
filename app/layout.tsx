@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     title: "Săn Voucher",
   },
   icons: {
-    icon: "/icons/icon-192.svg",
-    apple: "/icons/icon-192.svg",
+    icon: "/icons/logo.png",
+    apple: "/icons/logo.png",
   },
 };
 
@@ -37,7 +37,7 @@ export default function RootLayout({
     <html lang="vi" suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-title" content="Săn Voucher" />
-        <link rel="apple-touch-icon" href="/icons/icon-192.svg" />
+        <link rel="apple-touch-icon" href="/icons/logo.png" />
       </head>
       <body className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased selection:bg-shopee-500 selection:text-white">
         {children}
