@@ -113,11 +113,10 @@ export default function VoucherList({
             <button
               type="button"
               onClick={() => setSelectedMarket("shopee")}
-              className={`flex items-center space-x-1.5 py-1.5 px-3.5 rounded-full text-xs font-black transition-all ${
-                selectedMarket === "shopee"
+              className={`flex items-center space-x-1.5 py-1.5 px-3.5 rounded-full text-xs font-black transition-all ${selectedMarket === "shopee"
                   ? "bg-shopee-500 text-white shadow-xs"
                   : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-              }`}
+                }`}
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               <span>Shopee ({hotCoupons.length + upcomingCoupons.length})</span>
@@ -127,11 +126,10 @@ export default function VoucherList({
             <button
               type="button"
               onClick={() => setSelectedMarket("tiktok")}
-              className={`flex items-center space-x-1.5 py-1.5 px-3.5 rounded-full text-xs font-black transition-all ${
-                selectedMarket === "tiktok"
+              className={`flex items-center space-x-1.5 py-1.5 px-3.5 rounded-full text-xs font-black transition-all ${selectedMarket === "tiktok"
                   ? "bg-black text-white shadow-xs border border-tiktok-red/40"
                   : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-              }`}
+                }`}
             >
               <svg
                 className="w-3.5 h-3.5 fill-current text-tiktok-red"
@@ -235,7 +233,7 @@ export default function VoucherList({
                   </div>
                 </div>
                 <span className="text-[11px] font-semibold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded-full border border-amber-200/60 dark:border-amber-800/50">
-                  {upcomingCoupons.length} mã &bull; Gần &rarr; Xa
+                  {upcomingCoupons.length} mã
                 </span>
               </div>
 
