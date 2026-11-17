@@ -24,7 +24,7 @@ interface VoucherCardProps {
 }
 
 /**
- * [Design Read] Family: Riokupon-Style Commerce Ticket | Variance: 7/10 | Motion: 5/10 | Density: 9/10 | Accent: Shopee Vermilion (#ee4d2d) & Golden Sun
+ * [Design Read] Family: Tactile Pastel Commerce Ticket | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Pastel Terracotta (#d96947) & Warm Amber
  */
 export default function VoucherCard({
   voucher,
@@ -168,7 +168,7 @@ export default function VoucherCard({
             </span>
           </div>
         ) : (
-          <div className="w-16 sm:w-20 shrink-0 bg-gradient-to-br from-shopee-500 to-shopee-600 rounded-xl flex flex-col items-center justify-center p-2 text-white shadow-sm shadow-shopee-500/20">
+          <div className="w-16 sm:w-20 shrink-0 bg-shopee-500 rounded-xl flex flex-col items-center justify-center p-2 text-white shadow-sm shadow-shopee-500/15">
             <ShoppingBag className="w-6 h-6 stroke-[2.2] mb-1" />
             <span className="text-[10px] font-black tracking-tight uppercase">
               Shopee
@@ -200,10 +200,10 @@ export default function VoucherCard({
 
           {/* Metadata & Progress bar */}
           <div className="space-y-1 mt-auto">
-            {/* Thanh tiến độ gradient */}
+            {/* Thanh tiến độ pastel dịu mắt */}
             <div className="w-full h-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-amber-300 via-orange-300 to-rose-400 transition-all duration-500"
                 style={{ width: `${Math.max(5, isUpcoming ? 10 : percent)}%` }}
               />
             </div>
@@ -245,7 +245,7 @@ export default function VoucherCard({
               <button
                 type="button"
                 onClick={handleCopyCode}
-                className="w-full py-1.5 px-2 rounded-lg bg-orange-50 dark:bg-orange-950/50 hover:bg-orange-100 dark:hover:bg-orange-900/60 border border-orange-200 dark:border-orange-800/80 text-shopee-600 dark:text-shopee-400 font-bold text-[11px] flex items-center justify-center space-x-1 active:scale-95 transition"
+                className="w-full py-1.5 px-2 rounded-lg bg-orange-50/80 dark:bg-orange-950/40 hover:bg-orange-100/80 dark:hover:bg-orange-900/50 border border-orange-200/70 dark:border-orange-800/60 text-shopee-600 dark:text-shopee-400 font-bold text-[11px] flex items-center justify-center space-x-1 active:scale-95 transition"
               >
                 {isCopied ? (
                   <>
@@ -266,7 +266,7 @@ export default function VoucherCard({
               <button
                 type="button"
                 onClick={handleUseNow}
-                className="w-full py-1.5 px-2 rounded-lg bg-gradient-to-r from-shopee-600 to-orange-500 hover:from-shopee-700 hover:to-orange-600 text-white font-bold text-[11px] shadow-sm shadow-shopee-500/20 flex items-center justify-center space-x-1 active:scale-95 transition"
+                className="w-full py-1.5 px-2 rounded-lg bg-shopee-500 hover:bg-shopee-600 text-white font-bold text-[11px] shadow-sm shadow-shopee-500/15 flex items-center justify-center space-x-1 active:scale-95 transition"
               >
                 <ShoppingBag className="w-3 h-3" />
                 <span>Dùng ngay</span>
@@ -278,7 +278,7 @@ export default function VoucherCard({
               <button
                 type="button"
                 onClick={handleSaveBannerVoucher}
-                className="h-full w-full py-2 px-1.5 rounded-xl bg-gradient-to-br from-black to-zinc-800 hover:to-zinc-700 text-white font-bold text-[10px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition border border-rose-500/30 shadow-sm"
+                className="h-full w-full py-2 px-1.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-[10px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition border border-zinc-700/60 shadow-sm"
               >
                 <svg
                   className="w-4 h-4 fill-white"
@@ -293,7 +293,7 @@ export default function VoucherCard({
               <button
                 type="button"
                 onClick={handleSaveBannerVoucher}
-                className="h-full w-full py-2 px-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-[11px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition"
+                className="h-full w-full py-2 px-2 rounded-lg bg-amber-600/90 hover:bg-amber-600 text-white font-bold text-[11px] flex flex-col items-center justify-center space-y-1 active:scale-95 transition"
               >
                 <Bookmark className="w-3.5 h-3.5" />
                 <span>Lưu mã</span>

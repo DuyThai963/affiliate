@@ -1,0 +1,4 @@
+# Git Push Protocol (QUY TẮC BẮT BUỘC)
+- Tuyệt đối KHÔNG tự động chạy lệnh `git push` trong bất kỳ tình huống nào.
+- Chỉ thực hiện `git add` và `git commit` ở local.
+- Luôn chờ người dùng kiểm tra, test ứng dụng thực tế và ra lệnh rõ ràng (ví dụ: "push lên đi", "hãy push code") thì mới được phép thực hiện `git push`.

@@ -11,20 +11,38 @@ const config: Config = {
     extend: {
       colors: {
         shopee: {
-          50: "#fff5f1",
-          100: "#ffe8e0",
-          200: "#ffd5c7",
-          300: "#ffb49e",
-          400: "#ff8266",
-          500: "#ee4d2d",
-          600: "#dc3614",
-          700: "#b9290c",
-          800: "#98240f",
-          900: "#7c2213",
+          50: "#fdf6f2",
+          100: "#fbebe3",
+          200: "#f7d5c4",
+          300: "#f0b69c",
+          400: "#e58e6e",
+          500: "#d96947", // Soft warm terracotta, không neon
+          600: "#c45433",
+          700: "#a34125",
+          800: "#863620",
+          900: "#6e301d",
+        },
+        highlands: {
+          50: "#fcf4f5",
+          100: "#f8e6e7",
+          500: "#982b32", // Muted Burgundy sang trọng
+          600: "#822127",
+        },
+        tch: {
+          50: "#fdf7f1",
+          100: "#f9ede0",
+          500: "#b86c28", // Warm caramel latte
+          600: "#9e591c",
+        },
+        canvas: {
+          light: "#faf9f6", // Giấy kem mỹ thuật ấm dịu
+          card: "#ffffff",
+          dark: "#121214", // Than chì êm dịu, không đen kịt
+          cardDark: "#1a1a1e",
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        sans: ["var(--font-inter)", "system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       },
     },
   },

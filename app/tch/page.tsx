@@ -16,7 +16,7 @@ import Toast from "@/components/Toast";
 import { FnbDealItem, FnbDealsResponse } from "@/types/fnb";
 
 /**
- * [Design Read] Family: The Coffee House Modern Warmth | Variance: 8/10 | Motion: 5/10 | Density: 8/10 | Accent: TCH Amber Orange (#e57920) & Warm Coffee
+ * [Design Read] Family: The Coffee House Modern Warmth | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: TCH Warm Caramel (#b86c28) & Roasted Linen
  */
 export default function TchPage() {
   const [deals, setDeals] = useState<FnbDealItem[]>([]);
@@ -61,7 +61,7 @@ export default function TchPage() {
   return (
     <div className="max-w-md mx-auto min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col relative transition-colors shadow-2xl pb-12">
       {/* Sticky Header với Nút Back */}
-      <header className="sticky top-0 z-30 bg-[#e57920] text-white px-4 py-3.5 shadow-md flex items-center justify-between">
+      <header className="sticky top-0 z-30 bg-[#a35e21] text-white px-4 py-3.5 shadow-sm flex items-center justify-between border-b border-black/10">
         <div className="flex items-center space-x-3">
           <Link
             href="/"
@@ -72,7 +72,7 @@ export default function TchPage() {
           </Link>
 
           <div className="flex items-center space-x-2">
-            <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-[#e57920] shadow-sm font-bold">
+            <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-tch-500 shadow-sm font-bold">
               <Coffee className="w-4 h-4" />
             </div>
             <div>
@@ -99,7 +99,7 @@ export default function TchPage() {
       {/* Main Content */}
       <main className="flex-1 px-4 py-4 space-y-4">
         {/* Banner TCH */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#c96312] via-[#e57920] to-[#f58d38] p-5 text-white shadow-lg shadow-amber-950/20 space-y-3">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#8e4f1a] via-[#a35e21] to-[#b86c28] p-5 text-white shadow-sm shadow-amber-950/15 space-y-3">
           <div className="flex items-center justify-between">
             <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/15 text-white border border-white/20">
               <Smartphone className="w-3 h-3" />
@@ -139,7 +139,7 @@ export default function TchPage() {
             onClick={() => setFilter("all")}
             className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
               filter === "all"
-                ? "bg-white dark:bg-zinc-900 text-[#e57920] dark:text-amber-400 shadow-sm"
+                ? "bg-white dark:bg-zinc-900 text-tch-500 dark:text-amber-300 shadow-sm"
                 : "text-zinc-600 dark:text-zinc-400"
             }`}
           >
@@ -196,7 +196,7 @@ export default function TchPage() {
               </p>
               <button
                 onClick={() => setFilter("all")}
-                className="text-xs font-bold text-[#e57920] hover:underline"
+                className="text-xs font-bold text-tch-500 hover:underline"
               >
                 Xem tất cả ưu đãi Nhà
               </button>

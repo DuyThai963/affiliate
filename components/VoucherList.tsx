@@ -24,7 +24,7 @@ interface VoucherListProps {
 }
 
 /**
- * [Design Read] Family: Unified Dual-Section Multi-Platform Layout | Variance: 7/10 | Motion: 5/10 | Density: 9/10 | Accent: Vermilion (#ee4d2d) & TikTok Crimson (#fe2c55)
+ * [Design Read] Family: Unified Dual-Section Multi-Platform Layout | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Pastel Terracotta (#d96947) & Matte Charcoal (#121215)
  */
 export default function VoucherList({
   productCoupons,
@@ -129,7 +129,7 @@ export default function VoucherList({
               onClick={() => setSelectedMarket("tiktok")}
               className={`flex items-center space-x-1.5 py-1.5 px-3 rounded-lg text-xs font-bold transition-all ${
                 selectedMarket === "tiktok"
-                  ? "bg-black text-white shadow-sm shadow-black/40 border border-rose-500/40"
+                  ? "bg-zinc-900 text-white shadow-sm border border-zinc-700/60"
                   : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
               }`}
             >

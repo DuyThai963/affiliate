@@ -10,7 +10,7 @@ interface BottomNavProps {
 }
 
 /**
- * [Design Read] Family: Minimalist Tactile Mobile App Navigation | Variance: 6/10 | Motion: 6/10 | Density: 8/10 | Accent: Shopee Vermilion (#ee4d2d) & Highlands Crimson (#b31f24)
+ * [Design Read] Family: Minimalist Tactile Mobile App Navigation | Variance: 5/10 | Motion: 4/10 | Density: 8/10 | Accent: Pastel Terracotta (#d96947) & Warm Burgundy (#982b32)
  */
 export default function BottomNav({
   activeTab,
@@ -49,7 +49,7 @@ export default function BottomNav({
           onClick={() => onChangeTab("fnb")}
           className={`flex flex-col items-center justify-center py-1 rounded-2xl transition-all active:scale-95 relative ${
             activeTab === "fnb"
-              ? "text-[#b31f24] dark:text-rose-400 font-extrabold"
+              ? "text-highlands-500 dark:text-rose-300 font-extrabold"
               : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 font-medium"
           }`}
         >
@@ -59,7 +59,7 @@ export default function BottomNav({
                 activeTab === "fnb" ? "scale-110 stroke-[2.5]" : "stroke-[1.8]"
               }`}
             />
-            <span className="absolute -top-1.5 -right-3 px-1 py-0.2 rounded-full bg-rose-500 text-white text-[9px] font-black leading-tight">
+            <span className="absolute -top-1.5 -right-3 px-1 py-0.2 rounded-full bg-rose-400 text-white text-[9px] font-black leading-tight">
               HOT
             </span>
           </div>

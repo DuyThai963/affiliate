@@ -10,7 +10,7 @@ interface TikTokShopCardProps {
 }
 
 /**
- * [Design Read] Family: High-Contrast Tactile Mobile Commerce | Variance: 7/10 | Motion: 6/10 | Density: 7/10 | Accent: TikTok Black & Electric Crimson (#FE2C55)
+ * [Design Read] Family: High-Contrast Tactile Mobile Commerce | Variance: 6/10 | Motion: 4/10 | Density: 7/10 | Accent: Matte Charcoal (#121215) & Soft Crimson (#e05263)
  */
 export default function TikTokShopCard({
   affiliateLink,
@@ -85,20 +85,17 @@ export default function TikTokShopCard({
         </button>
       </div>
 
-      {/* 1 Nút to duy nhất: "Mở TikTok Shop (Nhận mã & Hoàn tiền)" */}
+      {/* 1 Nút to: "Mở TikTok Shop (Nhận mã & Hoàn tiền)" */}
       <button
         type="button"
         onClick={handleOpenTikTok}
-        className="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-[#010101] via-[#111111] to-[#FE2C55] hover:opacity-95 text-white font-extrabold text-base shadow-lg shadow-rose-950/20 active:scale-[0.98] transition-all flex items-center justify-center space-x-2.5 group relative overflow-hidden"
+        className="w-full py-4 px-5 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-white font-extrabold text-base shadow-sm border border-zinc-700/60 active:scale-[0.98] transition-all flex items-center justify-center space-x-2.5 group relative overflow-hidden"
       >
-        {/* Glow accent */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-
-        <ShoppingBag className="w-5 h-5 text-rose-400 transition-transform group-hover:scale-110" />
+        <ShoppingBag className="w-5 h-5 text-rose-300 transition-transform group-hover:scale-105" />
         <span className="tracking-tight">
           Mở TikTok Shop (Nhận mã &amp; Hoàn tiền)
         </span>
-        <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
+        <Sparkles className="w-4 h-4 text-amber-200" />
       </button>
 
       {/* Clean URL preview nhỏ gọn */}

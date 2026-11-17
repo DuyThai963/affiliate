@@ -22,7 +22,7 @@ interface FnbDealCardProps {
 }
 
 /**
- * [Design Read] Family: Editorial Tactile F&B Ticket | Variance: 7/10 | Motion: 5/10 | Density: 8/10 | Accent: Highlands Crimson (#b31f24) & TCH Amber (#e57920)
+ * [Design Read] Family: Editorial Tactile F&B Ticket | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Highlands Burgundy (#982b32) & TCH Warm Caramel (#b86c28)
  */
 export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
   const [isCopied, setIsCopied] = useState(false);
@@ -102,8 +102,8 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
             <div
               className={`w-7 h-7 rounded-xl flex items-center justify-center text-white font-bold shadow-sm ${
                 isHighlands
-                  ? "bg-[#b31f24] shadow-rose-950/20"
-                  : "bg-[#e57920] shadow-amber-950/20"
+                  ? "bg-highlands-500 shadow-rose-950/10"
+                  : "bg-tch-500 shadow-amber-950/10"
               }`}
             >
               <Coffee className="w-4 h-4" />
@@ -112,8 +112,8 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
               <span
                 className={`text-[11px] font-black uppercase tracking-wider ${
                   isHighlands
-                    ? "text-[#b31f24] dark:text-rose-400"
-                    : "text-[#e57920] dark:text-amber-400"
+                    ? "text-highlands-500 dark:text-rose-300"
+                    : "text-tch-500 dark:text-amber-300"
                 }`}
               >
                 {deal.brandName}
@@ -185,8 +185,8 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
                 onClick={handleAction}
                 className={`px-3.5 py-2 rounded-xl text-white font-bold text-xs shadow-sm active:scale-95 transition-all flex items-center space-x-1 shrink-0 ${
                   isHighlands
-                    ? "bg-[#b31f24] hover:bg-[#97191e] shadow-rose-950/20"
-                    : "bg-[#e57920] hover:bg-[#ca6816] shadow-amber-950/20"
+                    ? "bg-highlands-500 hover:bg-highlands-600 shadow-rose-950/10"
+                    : "bg-tch-500 hover:bg-tch-600 shadow-amber-950/10"
                 }`}
               >
                 <span>Dùng ngay</span>
@@ -200,8 +200,8 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
               onClick={handleAction}
               className={`w-full py-2.5 px-4 rounded-xl text-white font-extrabold text-xs shadow-sm active:scale-95 transition-all flex items-center justify-center space-x-1.5 ${
                 isHighlands
-                  ? "bg-gradient-to-r from-[#b31f24] to-[#c7272d] hover:opacity-95 shadow-rose-900/20"
-                  : "bg-gradient-to-r from-[#e57920] to-[#f38d38] hover:opacity-95 shadow-amber-900/20"
+                  ? "bg-highlands-500 hover:bg-highlands-600 shadow-rose-900/10"
+                  : "bg-tch-500 hover:bg-tch-600 shadow-amber-900/10"
               }`}
             >
               <span>{isHighlands ? "Nhận Ưu Đãi Zalo Ngay" : "Nhận Ưu Đãi Tại Quán"}</span>

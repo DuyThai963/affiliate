@@ -3,19 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --background: #f8fafc;
-  --foreground: #09090b;
+  --background: #faf9f6;
+  --foreground: #1f1f23;
+  --card-bg: #ffffff;
+  --card-border: #edece8;
 }
 
 .dark {
-  --background: #09090b;
-  --foreground: #f4f4f5;
+  --background: #121215;
+  --foreground: #ededf0;
+  --card-bg: #1a1a1f;
+  --card-border: #27272e;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
@@ -35,10 +39,7 @@ body {
   height: 16px;
   background-color: var(--background);
   border-radius: 9999px;
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-}
-.dark .ticket-notch-left::before {
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid var(--card-border);
 }
 
 .ticket-notch-right {
@@ -54,10 +55,7 @@ body {
   height: 16px;
   background-color: var(--background);
   border-radius: 9999px;
-  border-left: 1px solid rgba(0, 0, 0, 0.08);
-}
-.dark .ticket-notch-right::after {
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 1px solid var(--card-border);
 }
 
 /* Subtle scrollbar */
@@ -69,6 +67,6 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(150, 150, 150, 0.3);
+  background: rgba(160, 160, 160, 0.2);
   border-radius: 4px;
 }

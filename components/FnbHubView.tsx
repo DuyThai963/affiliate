@@ -20,7 +20,7 @@ interface FnbHubViewProps {
 }
 
 /**
- * [Design Read] Family: High-Visual F&B Commerce Hub | Variance: 8/10 | Motion: 6/10 | Density: 8/10 | Accent: Highlands Crimson (#b31f24) & TCH Orange (#e57920)
+ * [Design Read] Family: High-Visual F&B Commerce Hub | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Highlands Burgundy (#982b32) & TCH Warm Caramel (#b86c28)
  */
 export default function FnbHubView({ onShowToast }: FnbHubViewProps) {
   const [deals, setDeals] = useState<FnbDealItem[]>([]);
@@ -74,7 +74,7 @@ export default function FnbHubView({ onShowToast }: FnbHubViewProps) {
           {/* Card 1: Highlands Coffee -> Mở /highlands */}
           <Link
             href="/highlands"
-            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#8f181c] via-[#b31f24] to-[#c7272d] p-4 text-white shadow-md shadow-rose-950/20 active:scale-95 transition-all flex flex-col justify-between h-36"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#741d23] via-[#8c252c] to-[#982b32] p-4 text-white shadow-sm shadow-rose-950/15 active:scale-95 transition-all flex flex-col justify-between h-36"
           >
             <div className="flex items-start justify-between">
               <div className="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center text-white backdrop-blur-sm">
@@ -105,7 +105,7 @@ export default function FnbHubView({ onShowToast }: FnbHubViewProps) {
           {/* Card 2: The Coffee House -> Mở /tch */}
           <Link
             href="/tch"
-            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#c96312] via-[#e57920] to-[#f58d38] p-4 text-white shadow-md shadow-amber-950/20 active:scale-95 transition-all flex flex-col justify-between h-36"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#8e4f1a] via-[#a35e21] to-[#b86c28] p-4 text-white shadow-sm shadow-amber-950/15 active:scale-95 transition-all flex flex-col justify-between h-36"
           >
             <div className="flex items-start justify-between">
               <div className="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center text-white backdrop-blur-sm">
@@ -153,7 +153,7 @@ export default function FnbHubView({ onShowToast }: FnbHubViewProps) {
             onClick={() => setBrandFilter("highlands")}
             className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
               brandFilter === "highlands"
-                ? "bg-[#b31f24] text-white shadow-sm"
+                ? "bg-highlands-500 text-white shadow-sm"
                 : "text-zinc-600 dark:text-zinc-400"
             }`}
           >
@@ -164,7 +164,7 @@ export default function FnbHubView({ onShowToast }: FnbHubViewProps) {
             onClick={() => setBrandFilter("tch")}
             className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
               brandFilter === "tch"
-                ? "bg-[#e57920] text-white shadow-sm"
+                ? "bg-tch-500 text-white shadow-sm"
                 : "text-zinc-600 dark:text-zinc-400"
             }`}
           >

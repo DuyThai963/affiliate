@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 
 /**
- * [Design Read] Family: Unified Dual-Section Commerce & F&B Hub | Variance: 8/10 | Motion: 6/10 | Density: 9/10 | Accent: Vermilion (#ee4d2d), Highlands (#b31f24), TCH (#e57920)
+ * [Design Read] Family: Unified Dual-Section Commerce & F&B Hub | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Pastel Terracotta (#d96947), Burgundy (#982b32), Caramel (#b86c28)
  */
 export default function HomePage() {
   // Chuyển đổi 2 chế độ chính: 'ecommerce' (Săn mã Sàn) | 'fnb' (Cà phê & Deal)

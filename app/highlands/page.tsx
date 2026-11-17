@@ -17,7 +17,7 @@ import Toast from "@/components/Toast";
 import { FnbDealItem, FnbDealsResponse } from "@/types/fnb";
 
 /**
- * [Design Read] Family: Highlands Brand Editorial | Variance: 8/10 | Motion: 5/10 | Density: 8/10 | Accent: Highlands Crimson (#b31f24) & Warm Cream
+ * [Design Read] Family: Highlands Brand Editorial | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Highlands Burgundy (#982b32) & Warm Linen
  */
 export default function HighlandsPage() {
   const [deals, setDeals] = useState<FnbDealItem[]>([]);
@@ -62,7 +62,7 @@ export default function HighlandsPage() {
   return (
     <div className="max-w-md mx-auto min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col relative transition-colors shadow-2xl pb-12">
       {/* Sticky Header với Nút Back quay về Home */}
-      <header className="sticky top-0 z-30 bg-[#b31f24] text-white px-4 py-3.5 shadow-md flex items-center justify-between">
+      <header className="sticky top-0 z-30 bg-[#8c252c] text-white px-4 py-3.5 shadow-sm flex items-center justify-between border-b border-black/10">
         <div className="flex items-center space-x-3">
           <Link
             href="/"
@@ -73,7 +73,7 @@ export default function HighlandsPage() {
           </Link>
 
           <div className="flex items-center space-x-2">
-            <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-[#b31f24] shadow-sm font-bold">
+            <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-highlands-500 shadow-sm font-bold">
               <Coffee className="w-4 h-4" />
             </div>
             <div>
@@ -100,7 +100,7 @@ export default function HighlandsPage() {
       {/* Main Content */}
       <main className="flex-1 px-4 py-4 space-y-4">
         {/* Banner Highlands Zalo Mini App */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#8f181c] via-[#b31f24] to-[#c7272d] p-5 text-white shadow-lg shadow-rose-950/20 space-y-3">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#741d23] via-[#8c252c] to-[#982b32] p-5 text-white shadow-sm shadow-rose-950/15 space-y-3">
           <div className="flex items-center justify-between">
             <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/15 text-white border border-white/20">
               <QrCode className="w-3 h-3" />
@@ -137,13 +137,13 @@ export default function HighlandsPage() {
         {/* 3 Bước Hướng dẫn nhanh */}
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl p-4 space-y-2.5">
           <h3 className="font-extrabold text-xs uppercase tracking-wider text-zinc-700 dark:text-zinc-300 flex items-center space-x-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-[#b31f24]" />
+            <Sparkles className="w-3.5 h-3.5 text-highlands-500" />
             <span>Cách đổi mã tại quầy Highlands Coffee</span>
           </h3>
 
           <div className="grid grid-cols-3 gap-2 text-center pt-1">
             <div className="p-2 bg-zinc-50 dark:bg-zinc-800/60 rounded-xl space-y-1">
-              <span className="w-5 h-5 rounded-full bg-[#b31f24] text-white text-[10px] font-bold flex items-center justify-center mx-auto">
+              <span className="w-5 h-5 rounded-full bg-highlands-500 text-white text-[10px] font-bold flex items-center justify-center mx-auto">
                 1
               </span>
               <p className="text-[10px] font-bold text-zinc-800 dark:text-zinc-200">
@@ -153,7 +153,7 @@ export default function HighlandsPage() {
             </div>
 
             <div className="p-2 bg-zinc-50 dark:bg-zinc-800/60 rounded-xl space-y-1">
-              <span className="w-5 h-5 rounded-full bg-[#b31f24] text-white text-[10px] font-bold flex items-center justify-center mx-auto">
+              <span className="w-5 h-5 rounded-full bg-highlands-500 text-white text-[10px] font-bold flex items-center justify-center mx-auto">
                 2
               </span>
               <p className="text-[10px] font-bold text-zinc-800 dark:text-zinc-200">
@@ -163,7 +163,7 @@ export default function HighlandsPage() {
             </div>
 
             <div className="p-2 bg-zinc-50 dark:bg-zinc-800/60 rounded-xl space-y-1">
-              <span className="w-5 h-5 rounded-full bg-[#b31f24] text-white text-[10px] font-bold flex items-center justify-center mx-auto">
+              <span className="w-5 h-5 rounded-full bg-highlands-500 text-white text-[10px] font-bold flex items-center justify-center mx-auto">
                 3
               </span>
               <p className="text-[10px] font-bold text-zinc-800 dark:text-zinc-200">
@@ -180,7 +180,7 @@ export default function HighlandsPage() {
             onClick={() => setFilter("all")}
             className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
               filter === "all"
-                ? "bg-white dark:bg-zinc-900 text-[#b31f24] dark:text-rose-400 shadow-sm"
+                ? "bg-white dark:bg-zinc-900 text-highlands-500 dark:text-rose-300 shadow-sm"
                 : "text-zinc-600 dark:text-zinc-400"
             }`}
           >
@@ -237,7 +237,7 @@ export default function HighlandsPage() {
               </p>
               <button
                 onClick={() => setFilter("all")}
-                className="text-xs font-bold text-[#b31f24] hover:underline"
+                className="text-xs font-bold text-highlands-500 hover:underline"
               >
                 Xem tất cả ưu đãi Highlands
               </button>

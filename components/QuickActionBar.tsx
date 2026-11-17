@@ -20,7 +20,7 @@ interface QuickActionBarProps {
 }
 
 /**
- * [Design Read] Family: Neo-Tactile Commerce Action Bar | Variance: 7/10 | Motion: 6/10 | Density: 8/10 | Accent: Shopee Vermilion + Deep Facebook Blue
+ * [Design Read] Family: Neo-Tactile Pastel Commerce Action Bar | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: Terracotta (#d96947) + Soft Denim (#335384)
  */
 export default function QuickActionBar({
   affiliateLink,
@@ -118,13 +118,13 @@ export default function QuickActionBar({
         <button
           type="button"
           onClick={handleOpenShopee}
-          className="flex flex-col items-center justify-center p-3 rounded-xl bg-shopee-500 hover:bg-shopee-600 text-white shadow-sm shadow-shopee-500/20 active:scale-95 transition group"
+          className="flex flex-col items-center justify-center p-3 rounded-xl bg-shopee-500 hover:bg-shopee-600 text-white shadow-sm shadow-shopee-500/15 active:scale-[0.98] transition group"
         >
           <div className="flex items-center space-x-1.5 mb-1 font-bold text-xs sm:text-sm">
-            <ShoppingBag className="w-4 h-4 transition-transform group-hover:scale-110" />
+            <ShoppingBag className="w-4 h-4 transition-transform group-hover:scale-105" />
             <span>Mở Shopee Ngay</span>
           </div>
-          <span className="text-[10px] text-white/80 font-normal">
+          <span className="text-[10px] text-white/85 font-normal">
             App Shopee &amp; Web
           </span>
         </button>
@@ -134,7 +134,7 @@ export default function QuickActionBar({
           type="button"
           onClick={handleFbFunnel}
           disabled={isFbLoading}
-          className="flex flex-col items-center justify-center p-3 rounded-xl bg-gradient-to-br from-[#1877F2] to-[#0d60cc] hover:from-[#166fe5] hover:to-[#0a52b0] text-white shadow-sm shadow-blue-500/20 active:scale-95 transition disabled:opacity-70 group"
+          className="flex flex-col items-center justify-center p-3 rounded-xl bg-[#335384] hover:bg-[#2b4670] text-white shadow-sm shadow-slate-900/10 active:scale-[0.98] transition disabled:opacity-70 group border border-white/10"
         >
           <div className="flex items-center space-x-1.5 mb-1 font-bold text-xs sm:text-sm">
             {isFbLoading ? (
