@@ -5,6 +5,7 @@ import {
   AccesstradeCouponItem,
   VoucherItem,
   VoucherSearchResponse,
+  VoucherCategoryType,
 } from "@/types/voucher";
 
 const HOT_COUPONS_CACHE_KEY = "shopee_hot_coupons_cache_v2";
@@ -26,6 +27,7 @@ function getTikTokCoupons(defaultAffLink?: string): VoucherItem[] {
       percentageUsed: 94,
       endTime: new Date(Date.now() + 3600000 * 16).toISOString(),
       affLink: aff,
+      voucherType: "shipping",
     },
     {
       id: "tt-2",
@@ -38,9 +40,23 @@ function getTikTokCoupons(defaultAffLink?: string): VoucherItem[] {
       percentageUsed: 88,
       endTime: new Date(Date.now() + 3600000 * 12).toISOString(),
       affLink: aff,
+      voucherType: "global",
     },
     {
       id: "tt-3",
+      platform: "tiktok",
+      code: null,
+      name: "Voucher Shop Nhà Bán Giảm 30.000đ",
+      description: "Mã ưu đãi từ gian hàng dành cho khách mua sắm tại shop",
+      discountValue: "Giảm 30.000đ",
+      minSpend: "150.000đ",
+      percentageUsed: 80,
+      endTime: new Date(Date.now() + 3600000 * 20).toISOString(),
+      affLink: aff,
+      voucherType: "shop",
+    },
+    {
+      id: "tt-4",
       platform: "tiktok",
       code: null,
       name: "Trợ Giá Sàn Giảm 40.000đ",
@@ -50,9 +66,10 @@ function getTikTokCoupons(defaultAffLink?: string): VoucherItem[] {
       percentageUsed: 75,
       endTime: new Date(Date.now() + 3600000 * 18).toISOString(),
       affLink: aff,
+      voucherType: "global",
     },
     {
-      id: "tt-4",
+      id: "tt-5",
       platform: "tiktok",
       code: null,
       name: "Ưu Đãi Bạn Mới Giảm 25.000đ",
@@ -62,6 +79,7 @@ function getTikTokCoupons(defaultAffLink?: string): VoucherItem[] {
       percentageUsed: 62,
       endTime: new Date(Date.now() + 86400000 * 3).toISOString(),
       affLink: aff,
+      voucherType: "global",
     },
     {
       id: "tt-5",
@@ -140,6 +158,30 @@ function mapCouponItem(item: any, defaultAffLink?: string): VoucherItem {
     percentageUsed,
     affLink: item.aff_link || defaultAffLink,
     bannerUrl: item.link || item.coupon_save_link || item.banner || item.image,
+    voucherType: (() => {
+      const text = `${item.name || ""} ${item.content || ""} ${item.coupon_desc || ""} ${item.category || ""}`.toLowerCase();
+      if (
+        text.includes("ship") ||
+        text.includes("vận chuyển") ||
+        text.includes("freeship") ||
+        text.includes("giao hàng") ||
+        text.includes("phí vận") ||
+        text.includes("hỗ trợ phí")
+      ) {
+        return "shipping" as VoucherCategoryType;
+      }
+      if (
+        text.includes("shop") ||
+        text.includes("người bán") ||
+        text.includes("gian hàng") ||
+        text.includes("seller") ||
+        text.includes("nhà bán") ||
+        text.includes("cửa hàng")
+      ) {
+        return "shop" as VoucherCategoryType;
+      }
+      return "global" as VoucherCategoryType;
+    })(),
   };
 }
 
@@ -173,26 +215,28 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
       platform: "shopee",
       code: "SHPPROD15K",
       name: "Giảm 15% Đơn tối thiểu 200,000đ",
-      description: "Mã giảm giá áp dụng riêng cho sản phẩm này khi đặt hàng",
+      description: "Mã giảm giá áp dụng riêng từ Người bán cho sản phẩm này",
       discountValue: "Giảm 15%",
       minSpend: "200.000đ",
       percentageUsed: 99,
       startTime: new Date().toISOString(),
       endTime: new Date(Date.now() + 14 * 3600000).toISOString(),
       affLink: demoShopeeAffiliate,
+      voucherType: "shop",
     },
     {
       id: "prod-2",
       platform: "shopee",
       code: "DISC12K",
       name: "Giảm 12% Đơn tối thiểu 99,000đ",
-      description: "Ưu đãi độc quyền của nhà bán hàng trên Shopee",
+      description: "Ưu đãi độc quyền của gian hàng người bán trên Shopee",
       discountValue: "Giảm 12%",
       minSpend: "99.000đ",
       percentageUsed: 55,
       startTime: new Date().toISOString(),
       endTime: new Date(Date.now() + 14 * 3600000).toISOString(),
       affLink: demoShopeeAffiliate,
+      voucherType: "shop",
     },
   ];
 
@@ -209,6 +253,7 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
       startTime: new Date(Date.now() + 3600000 * 8).toISOString(),
       endTime: new Date(Date.now() + 3600000 * 12).toISOString(),
       affLink: demoShopeeAffiliate,
+      voucherType: "global",
     },
     {
       id: "upcoming-2",
@@ -222,6 +267,7 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
       startTime: new Date(Date.now() + 3600000 * 17).toISOString(),
       endTime: new Date(Date.now() + 3600000 * 20).toISOString(),
       affLink: demoShopeeAffiliate,
+      voucherType: "shipping",
     },
   ];
 
@@ -231,39 +277,56 @@ function getMockDemoData(cleanUrl: string, platform: PlatformType): VoucherSearc
       platform: "shopee",
       code: "FREESHIP0D",
       name: "Miễn Phí Vận Chuyển Toàn Sàn",
-      description: "Giảm tối đa 30K phí vận chuyển ShopeePay",
+      description: "Giảm tối đa 30K phí vận chuyển bưu tá giao hàng",
       discountValue: "FreeShip 30K",
       minSpend: "0đ",
       percentageUsed: 94,
       startTime: new Date().toISOString(),
       endTime: new Date(Date.now() + 86400000).toISOString(),
       affLink: demoShopeeAffiliate,
+      voucherType: "shipping",
     },
     {
       id: "hot-2",
       platform: "shopee",
       code: "SHOPEE25K",
       name: "Giảm 25.000đ Toàn Sàn",
-      description: "Mã chớp nhoáng săn sale mở mới mỗi khung giờ",
+      description: "Mã chớp nhoáng săn sale toàn ngành mở mới mỗi khung giờ",
       discountValue: "25.000đ",
       minSpend: "120.000đ",
       percentageUsed: 78,
       startTime: new Date().toISOString(),
       endTime: new Date(Date.now() + 86400000).toISOString(),
       affLink: demoShopeeAffiliate,
+      voucherType: "global",
     },
     {
       id: "hot-3",
       platform: "shopee",
+      code: "SHOPVIP40K",
+      name: "Voucher Shop Gian Hàng Giảm 40.000đ",
+      description: "Mã giảm giá trực tiếp từ nhà bán hàng chính hãng",
+      discountValue: "Giảm 40.000đ",
+      minSpend: "250.000đ",
+      percentageUsed: 68,
+      startTime: new Date().toISOString(),
+      endTime: new Date(Date.now() + 86400000 * 2).toISOString(),
+      affLink: demoShopeeAffiliate,
+      voucherType: "shop",
+    },
+    {
+      id: "hot-4",
+      platform: "shopee",
       code: "HOANXU50K",
       name: "Hoàn 15% Xu Tối Đa 50.000 Xu",
-      description: "Nhận Shopee Xu ngay sau khi đơn hàng giao thành công",
+      description: "Nhận Shopee Xu toàn sàn ngay sau khi đơn hàng giao thành công",
       discountValue: "Hoàn 50K Xu",
       minSpend: "300.000đ",
       percentageUsed: 55,
       startTime: new Date().toISOString(),
       endTime: new Date(Date.now() + 86400000 * 4).toISOString(),
       affLink: demoShopeeAffiliate,
+      voucherType: "global",
     },
   ];
 

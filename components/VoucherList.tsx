@@ -76,7 +76,7 @@ export default function VoucherList({
               {productCoupons.map((voucher) => (
                 <VoucherCard
                   key={voucher.id}
-                  voucher={voucher}
+                  voucher={{ ...voucher, voucherType: voucher.voucherType || "shop" }}
                   defaultAffiliateLink={affiliateLink}
                   onShowToast={onShowToast}
                 />

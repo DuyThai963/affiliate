@@ -13,8 +13,10 @@ import {
   ChevronUp,
   Bookmark,
   ShoppingBag,
+  Truck,
+  Store,
 } from "lucide-react";
-import { VoucherItem } from "@/types/voucher";
+import { VoucherItem, VoucherCategoryType } from "@/types/voucher";
 
 interface VoucherCardProps {
   voucher: VoucherItem;
@@ -23,8 +25,67 @@ interface VoucherCardProps {
   onShowToast: (message: string) => void;
 }
 
+function getCategoryInfo(voucher: VoucherItem) {
+  let type: VoucherCategoryType = voucher.voucherType || "global";
+  if (!voucher.voucherType) {
+    const text = `${voucher.name} ${voucher.description} ${voucher.discountValue || ""}`.toLowerCase();
+    if (
+      text.includes("ship") ||
+      text.includes("vận chuyển") ||
+      text.includes("freeship") ||
+      text.includes("giao hàng") ||
+      text.includes("phí vận") ||
+      text.includes("bưu tá")
+    ) {
+      type = "shipping";
+    } else if (
+      text.includes("shop") ||
+      text.includes("người bán") ||
+      text.includes("gian hàng") ||
+      text.includes("seller") ||
+      text.includes("nhà bán") ||
+      text.includes("cửa hàng")
+    ) {
+      type = "shop";
+    }
+  }
+
+  switch (type) {
+    case "shipping":
+      return {
+        type: "shipping" as const,
+        label: "FreeShip",
+        badgeText: "Vận chuyển",
+        badgeBg: "bg-emerald-50 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60",
+        iconBg: "bg-emerald-600 dark:bg-emerald-600",
+        textColor: "text-emerald-600 dark:text-emerald-400",
+        dotColor: "bg-emerald-500",
+      };
+    case "shop":
+      return {
+        type: "shop" as const,
+        label: "Mã Shop",
+        badgeText: "Voucher Shop",
+        badgeBg: "bg-violet-50 dark:bg-violet-950/70 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-800/60",
+        iconBg: "bg-violet-600 dark:bg-violet-600",
+        textColor: "text-violet-600 dark:text-violet-400",
+        dotColor: "bg-violet-500",
+      };
+    default:
+      return {
+        type: "global" as const,
+        label: "Toàn Sàn",
+        badgeText: "Toàn ngành",
+        badgeBg: "bg-orange-50 dark:bg-orange-950/70 text-shopee-600 dark:text-orange-300 border-orange-200 dark:border-orange-800/60",
+        iconBg: "bg-shopee-500",
+        textColor: "text-shopee-600 dark:text-shopee-400",
+        dotColor: "bg-shopee-500",
+      };
+  }
+}
+
 /**
- * [Design Read] Family: TikTok Shop Commerce Ticket | Variance: 6/10 | Motion: 4/10 | Density: 8/10 | Accent: TikTok Red (#fe2c55), Cyan (#25f4ee) & Pill CTAs
+ * [Design Read] Family: Multi-Category Tactile Commerce Ticket | Variance: 7/10 | Motion: 4/10 | Density: 8/10 | Accent: FreeShip Emerald (#059669), Shop Violet (#7c3aed), Global Terracotta (#d96947)
  */
 export default function VoucherCard({
   voucher,
@@ -130,6 +191,7 @@ export default function VoucherCard({
     }
   };
 
+  const cat = getCategoryInfo(voucher);
   const percent = voucher.percentageUsed ?? 0;
   const remainingTimeStr = getRemainingTimeText();
 
@@ -139,7 +201,7 @@ export default function VoucherCard({
     const minSpend = voucher.minSpend ? `Đơn tối thiểu ${voucher.minSpend}` : "Đơn 0đ";
     return (
       <span className="text-zinc-900 dark:text-zinc-100 font-bold text-xs sm:text-[13px] leading-snug">
-        <span className="text-shopee-600 dark:text-shopee-400 font-extrabold mr-1">
+        <span className={`${cat.textColor} font-black mr-1`}>
           {discount}
         </span>
         <span className="text-zinc-700 dark:text-zinc-300 font-medium">
@@ -153,8 +215,8 @@ export default function VoucherCard({
     <div className="bg-white dark:bg-[#161823] border border-zinc-200/90 dark:border-zinc-800 rounded-3xl shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col">
       {/* Khối chính: 3 cột (Logo - Nội dung & Progress bar - Nút hành động) */}
       <div className="p-3.5 flex items-stretch space-x-3">
-        {/* Cột 1: Logo Shopee hoặc TikTok Shop */}
-        {voucher.platform === "tiktok" ? (
+        {/* Cột 1: Icon & Màu sắc phân loại */}
+        {voucher.platform === "tiktok" && cat.type !== "shipping" ? (
           <div className="w-16 sm:w-20 shrink-0 bg-black rounded-2xl flex flex-col items-center justify-center p-2 text-white shadow-xs border border-zinc-800 relative group overflow-hidden">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-tiktok-cyan/30 to-tiktok-red/30 opacity-60 rounded-2xl" />
             <div className="relative z-10 flex flex-col items-center">
@@ -170,11 +232,28 @@ export default function VoucherCard({
               </span>
             </div>
           </div>
+        ) : cat.type === "shipping" ? (
+          /* MÃ SHIP / VẬN CHUYỂN: ICON XE GIAO HÀNG & MÀU XANH LÁ/MINT */
+          <div className="w-16 sm:w-20 shrink-0 bg-emerald-600 dark:bg-emerald-600 rounded-2xl flex flex-col items-center justify-center p-2 text-white shadow-xs">
+            <Truck className="w-6 h-6 stroke-[2.2] mb-1" />
+            <span className="text-[9px] font-black tracking-tight uppercase text-center leading-none">
+              FreeShip
+            </span>
+          </div>
+        ) : cat.type === "shop" ? (
+          /* MÃ CỦA SHOP / NGƯỜI BÁN: ICON CỬA HÀNG & MÀU TÍM VIOLET */
+          <div className="w-16 sm:w-20 shrink-0 bg-violet-600 dark:bg-violet-600 rounded-2xl flex flex-col items-center justify-center p-2 text-white shadow-xs">
+            <Store className="w-6 h-6 stroke-[2.2] mb-1" />
+            <span className="text-[9px] font-black tracking-tight uppercase text-center leading-none">
+              Mã Shop
+            </span>
+          </div>
         ) : (
+          /* MÃ TOÀN NGÀNH / TOÀN SÀN: ICON TÚI MUA SẮM & MÀU CAM HIỆN TẠI */
           <div className="w-16 sm:w-20 shrink-0 bg-shopee-500 rounded-2xl flex flex-col items-center justify-center p-2 text-white shadow-xs">
             <ShoppingBag className="w-6 h-6 stroke-[2.2] mb-1" />
-            <span className="text-[10px] font-black tracking-tight uppercase">
-              Shopee
+            <span className="text-[9px] font-black tracking-tight uppercase text-center leading-none">
+              Toàn Sàn
             </span>
           </div>
         )}
@@ -184,8 +263,8 @@ export default function VoucherCard({
           <div>
             {/* Tag loại ưu đãi & Badge sắp diễn ra */}
             <div className="flex items-center space-x-1.5 mb-1 flex-wrap gap-y-1">
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-100/90 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60">
-                {isUpcoming ? "SẮP DIỄN RA" : "VOUCHER"}
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-black border ${cat.badgeBg}`}>
+                {isUpcoming ? "SẮP DIỄN RA" : cat.badgeText.toUpperCase()}
               </span>
 
               {voucher.code && (
@@ -214,7 +293,7 @@ export default function VoucherCard({
             {/* Text Đã dùng % - còn X giờ nữa */}
             <div className="flex items-center justify-between text-[10px] text-zinc-500 dark:text-zinc-400 pt-0.5">
               <div className="flex items-center space-x-1 truncate">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-tiktok-red shrink-0" />
+                <span className={`inline-block w-1.5 h-1.5 rounded-full ${cat.dotColor} shrink-0`} />
                 <span className="truncate">
                   {isUpcoming
                     ? remainingTimeStr

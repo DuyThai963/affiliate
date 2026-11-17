@@ -19,6 +19,8 @@ export interface AccesstradeCouponItem {
   [key: string]: unknown;
 }
 
+export type VoucherCategoryType = "shipping" | "shop" | "global";
+
 export interface VoucherItem {
   id: string;
   code: string | null;
@@ -33,6 +35,7 @@ export interface VoucherItem {
   bannerUrl?: string;
   isExpired?: boolean;
   platform?: SupportedPlatform;
+  voucherType?: VoucherCategoryType;
 }
 
 export type SupportedPlatform = "shopee" | "tiktok";
