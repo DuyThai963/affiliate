@@ -82,7 +82,7 @@ function getTikTokCoupons(defaultAffLink?: string): VoucherItem[] {
       voucherType: "global",
     },
     {
-      id: "tt-5",
+      id: "tt-6",
       platform: "tiktok",
       code: null,
       name: "Hoàn Xu Xtra 10% (Tối đa 30K Xu)",
@@ -92,6 +92,7 @@ function getTikTokCoupons(defaultAffLink?: string): VoucherItem[] {
       percentageUsed: 45,
       endTime: new Date(Date.now() + 86400000 * 5).toISOString(),
       affLink: aff,
+      voucherType: "global",
     },
   ];
 }

@@ -315,9 +315,9 @@ export default function TchPage() {
               ))}
             </div>
           ) : filteredDeals.length > 0 ? (
-            filteredDeals.map((deal) => (
+            filteredDeals.map((deal, idx) => (
               <FnbDealCard
-                key={deal.id}
+                key={`${deal.id}-${idx}`}
                 deal={deal}
                 onShowToast={showToast}
               />

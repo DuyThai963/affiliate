@@ -73,9 +73,9 @@ export default function VoucherList({
           {/* Danh sách mã riêng cho sản phẩm */}
           {productCoupons.length > 0 ? (
             <div className="space-y-3 pt-1">
-              {productCoupons.map((voucher) => (
+              {productCoupons.map((voucher, idx) => (
                 <VoucherCard
-                  key={voucher.id}
+                  key={`prod-${voucher.id}-${idx}`}
                   voucher={{ ...voucher, voucherType: voucher.voucherType || "shop" }}
                   defaultAffiliateLink={affiliateLink}
                   onShowToast={onShowToast}
@@ -160,9 +160,9 @@ export default function VoucherList({
 
             {tiktokCoupons.length > 0 ? (
               <div className="space-y-3">
-                {tiktokCoupons.map((voucher) => (
+                {tiktokCoupons.map((voucher, idx) => (
                   <VoucherCard
-                    key={voucher.id}
+                    key={`tt-${voucher.id}-${idx}`}
                     voucher={voucher}
                     defaultAffiliateLink={affiliateLink || "https://shop.tiktok.com"}
                     onShowToast={onShowToast}
@@ -196,9 +196,9 @@ export default function VoucherList({
 
               {hotCoupons.length > 0 ? (
                 <div className="space-y-3">
-                  {(showAllHot ? hotCoupons : hotCoupons.slice(0, 5)).map((voucher) => (
+                  {(showAllHot ? hotCoupons : hotCoupons.slice(0, 5)).map((voucher, idx) => (
                     <VoucherCard
-                      key={voucher.id}
+                      key={`hot-${voucher.id}-${idx}`}
                       voucher={voucher}
                       defaultAffiliateLink={affiliateLink}
                       onShowToast={onShowToast}
@@ -245,9 +245,9 @@ export default function VoucherList({
 
               {upcomingCoupons.length > 0 ? (
                 <div className="space-y-3">
-                  {(showAllUpcoming ? upcomingCoupons : upcomingCoupons.slice(0, 5)).map((voucher) => (
+                  {(showAllUpcoming ? upcomingCoupons : upcomingCoupons.slice(0, 5)).map((voucher, idx) => (
                     <VoucherCard
-                      key={voucher.id}
+                      key={`up-${voucher.id}-${idx}`}
                       voucher={voucher}
                       defaultAffiliateLink={affiliateLink}
                       isUpcoming={true}
