@@ -9,6 +9,7 @@ import VoucherList from "@/components/VoucherList";
 import VoucherSkeleton from "@/components/VoucherSkeleton";
 import BottomNav from "@/components/BottomNav";
 import FnbHubView from "@/components/FnbHubView";
+import ScrollToTop from "@/components/ScrollToTop";
 import Toast from "@/components/Toast";
 import { VoucherSearchResponse } from "@/types/voucher";
 import {
@@ -209,6 +210,9 @@ export default function HomePage() {
         activeTab={activeMode}
         onChangeTab={setActiveMode}
       />
+
+      {/* Nút lướt lên đầu trang khi cuộn xuống */}
+      <ScrollToTop bottomClass="bottom-20" />
 
       {/* Toast Notification */}
       <Toast message={toastMessage} />

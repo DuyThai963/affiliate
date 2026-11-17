@@ -19,6 +19,7 @@ import {
   MapPinOff,
 } from "lucide-react";
 import FnbDealCard from "@/components/FnbDealCard";
+import ScrollToTop from "@/components/ScrollToTop";
 import Toast from "@/components/Toast";
 import { FnbDealItem, FnbDealsResponse } from "@/types/fnb";
 import {
@@ -334,6 +335,9 @@ export default function HighlandsPage() {
           <span>Về Săn Mã Shopee &bull; TikTok</span>
         </Link>
       </div>
+
+      {/* Nút lướt lên đầu trang */}
+      <ScrollToTop bottomClass="bottom-5" />
 
       <Toast message={toastMessage} />
     </div>
