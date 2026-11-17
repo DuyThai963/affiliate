@@ -138,12 +138,32 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
           </p>
         </div>
 
-        {/* Khung giờ vàng / Thời gian áp dụng */}
-        <div className="mt-2.5 p-2 bg-zinc-50 dark:bg-zinc-900/60 rounded-2xl text-[11px] text-zinc-600 dark:text-zinc-300 space-y-1 border border-zinc-100 dark:border-zinc-800/80">
+        {/* Khung giờ vàng / Thời gian áp dụng / Pos code / Hoa hồng */}
+        <div className="mt-2.5 p-2.5 bg-zinc-50 dark:bg-zinc-900/60 rounded-2xl text-[11px] text-zinc-600 dark:text-zinc-300 space-y-1.5 border border-zinc-100 dark:border-zinc-800/80">
+          {deal.posCode && (
+            <div className="flex items-center justify-between text-[10px]">
+              <span className="font-mono bg-zinc-200/80 dark:bg-zinc-800 px-2 py-0.5 rounded-full font-bold text-zinc-700 dark:text-zinc-300">
+                Pos Code: {deal.posCode}
+              </span>
+              {deal.commission && (
+                <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                  {deal.commission}
+                </span>
+              )}
+            </div>
+          )}
+
+          {deal.applicableProducts && (
+            <div className="text-[11px] text-zinc-700 dark:text-zinc-300 font-medium">
+              <span className="text-zinc-500">Món áp dụng: </span>
+              <span>{deal.applicableProducts}</span>
+            </div>
+          )}
+
           {deal.timeSlot && (
             <div className="flex items-center space-x-1.5 font-medium">
               <Clock className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-              <span>Khung giờ: <strong className="text-zinc-800 dark:text-zinc-200">{deal.timeSlot}</strong></span>
+              <span>Thời gian: <strong className="text-zinc-800 dark:text-zinc-200">{deal.timeSlot}</strong></span>
             </div>
           )}
 
@@ -224,8 +244,13 @@ export default function FnbDealCard({ deal, onShowToast }: FnbDealCardProps) {
             </button>
 
             {showGuide && (
-              <div className="mt-1.5 p-2 bg-amber-50/70 dark:bg-amber-950/30 rounded-lg border border-amber-200/60 dark:border-amber-900/50 text-[10px] text-amber-900 dark:text-amber-300 leading-relaxed animate-in fade-in duration-150">
-                {deal.redeemGuide}
+              <div className="mt-1.5 p-2.5 bg-amber-50/80 dark:bg-amber-950/30 rounded-xl border border-amber-200/60 dark:border-amber-900/50 text-[10px] text-amber-900 dark:text-amber-200 leading-relaxed animate-in fade-in duration-150 space-y-1.5">
+                <p><strong>Hướng dẫn: </strong>{deal.redeemGuide}</p>
+                {deal.terms && (
+                  <p className="pt-1 border-t border-amber-200/50 dark:border-amber-900/40 text-zinc-600 dark:text-zinc-300">
+                    <strong>Điều khoản: </strong>{deal.terms}
+                  </p>
+                )}
               </div>
             )}
           </div>
