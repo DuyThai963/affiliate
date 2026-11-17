@@ -12,9 +12,6 @@ import FnbHubView from "@/components/FnbHubView";
 import Toast from "@/components/Toast";
 import { VoucherSearchResponse } from "@/types/voucher";
 import {
-  Terminal,
-  ChevronDown,
-  ChevronUp,
   Info,
   AlertTriangle,
 } from "lucide-react";
@@ -32,7 +29,6 @@ export default function HomePage() {
   const [data, setData] = useState<VoucherSearchResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [showLogs, setShowLogs] = useState(false);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -56,7 +52,6 @@ export default function HomePage() {
             upcomingCoupons: initData.upcomingCoupons || [],
             hotCoupons: initData.hotCoupons || [],
             tiktokCoupons: initData.tiktokCoupons || [],
-            debugLogs: initData.debugLogs,
           }));
         }
       } catch (e) {
@@ -197,37 +192,6 @@ export default function HomePage() {
                   onShowToast={showToast}
                 />
               </>
-            )}
-
-            {/* BẢNG KIỂM TRA LOG KẾT NỐI API ACCESSTRADE */}
-            {data?.debugLogs && data.debugLogs.length > 0 && (
-              <div className="pt-2">
-                <button
-                  type="button"
-                  onClick={() => setShowLogs(!showLogs)}
-                  className="w-full py-2 px-3 bg-zinc-100 dark:bg-zinc-800/80 hover:bg-zinc-200 dark:hover:bg-zinc-700/80 rounded-xl text-[11px] font-bold text-zinc-600 dark:text-zinc-400 flex items-center justify-between transition"
-                >
-                  <div className="flex items-center space-x-1.5">
-                    <Terminal className="w-3.5 h-3.5 text-emerald-500" />
-                    <span>Xem log phản hồi API Accesstrade ({data.debugLogs.length} sự kiện)</span>
-                  </div>
-                  {showLogs ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                </button>
-
-                {showLogs && (
-                  <div className="mt-2 p-3 bg-zinc-900 text-zinc-200 rounded-xl font-mono text-[10px] space-y-1 overflow-x-auto border border-zinc-800">
-                    <div className="text-zinc-500 pb-1 border-b border-zinc-800 font-sans font-bold text-[11px]">
-                      Server Request Logs:
-                    </div>
-                    {data.debugLogs.map((log, idx) => (
-                      <div key={idx} className="flex items-start space-x-1.5">
-                        <span className="text-emerald-400 shrink-0">&gt;</span>
-                        <span className="break-all">{log}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
             )}
           </main>
         </>
